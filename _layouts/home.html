@@ -11,10 +11,11 @@ layout: default
 
 <div class="home-container">
   <div class="category-bar" id="category-bar">
-    <button class="cat-tab active" data-cat="all">All Reports</button>
+    <button class="cat-tab active" data-cat="all">All Reports <span class="cat-count">{{ site.posts | size }}</span></button>
     {% assign categories = site.posts | map: "category" | uniq | sort %}
     {% for cat in categories %}
-    <button class="cat-tab" data-cat="{{ cat }}">{{ cat }}</button>
+    {% assign cat_count = site.posts | where: "category", cat | size %}
+    <button class="cat-tab" data-cat="{{ cat }}">{{ cat }} <span class="cat-count">{{ cat_count }}</span></button>
     {% endfor %}
   </div>
 
