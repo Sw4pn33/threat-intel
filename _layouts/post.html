@@ -12,8 +12,12 @@ layout: default
         <div class="post-meta-left">
           <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
           <span class="post-separator">&bull;</span>
-          <span class="post-readtime">{{ page.readtime | default: "12" }} min read</span>
+          <span class="post-readtime" id="readtime">{{ page.readtime | default: "12" }} min read</span>
         </div>
+        <button class="share-btn" id="share-btn" title="Copy link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 10l4-4M9.5 3.5l1-1a2.12 2.12 0 013 3l-1 1M6.5 12.5l-1 1a2.12 2.12 0 01-3-3l1-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span id="share-text">Copy Link</span>
+        </button>
       </div>
     </div>
   </div>
@@ -168,5 +172,34 @@ layout: default
       if (!pending) { pending = true; requestAnimationFrame(sync); }
     });
     sync();
+
+    // Share / copy link
+    var shareBtn = document.getElementById('share-btn');
+    var shareText = document.getElementById('share-text');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', function() {
+        var url = window.location.href.split('#')[0];
+        if (navigator.share) {
+          navigator.share({ title: document.title, url: url });
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function() {
+            shareText.textContent = 'Copied!';
+            setTimeout(function() { shareText.textContent = 'Copy Link'; }, 2000);
+          });
+        }
+      });
+    }
+
+    // Reading progress text
+    var readEl = document.getElementById('readtime');
+    var totalMin = parseInt(readEl ? readEl.textContent : '15') || 15;
+    window.addEventListener('scroll', function() {
+      if (!readEl) return;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = h > 0 ? Math.min(window.scrollY / h, 1) : 0;
+      var done = Math.max(1, Math.round(pct * totalMin));
+      if (pct >= 0.95) readEl.textContent = totalMin + ' min read';
+      else readEl.textContent = done + ' of ' + totalMin + ' min';
+    });
   });
 </script>
