@@ -401,19 +401,8 @@ img { max-width: 100%; height: auto; border-radius: var(--radius); }
   align-items: center;
   justify-content: center;
   -webkit-tap-highlight-color: transparent;
-  flex-direction: column;
 }
 .mob-toc-fab:active { background: var(--accent-glow); }
-.mob-toc-label {
-  position: absolute;
-  bottom: -18px;
-  font-family: var(--font-sans);
-  font-size: 0.6rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  white-space: nowrap;
-  letter-spacing: 0.02em;
-}
 
 .mob-toc-overlay {
   display: none;
