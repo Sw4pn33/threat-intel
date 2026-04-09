@@ -1,0 +1,27 @@
+title: "Threat Intelligence Reports"
+description: "Cyber Threat Intelligence Research & Investigations"
+url: "https://sw4pn33.github.io"
+baseurl: "/threat-intel"
+permalink: /blog/:title/
+
+author:
+  name: "Sw4pn33"
+  role: "Threat Intelligence Researcher"
+
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

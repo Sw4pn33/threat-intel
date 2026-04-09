@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  {% seo %}
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="{{ '/' | relative_url }}" class="nav-logo">
+        <span class="logo-icon">TI</span>
+        <span class="logo-text">Threat Intelligence Reports</span>
+      </a>
+      <div class="nav-links">
+        <a href="{{ '/' | relative_url }}">All Reports</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>&copy; {{ 'now' | date: '%Y' }} Threat Intelligence Reports. Independent research for the security community.</p>
+      <p class="footer-disclaimer">All findings are based on open-source intelligence (OSINT) and publicly available data. No systems were compromised during this research.</p>
+    </div>
+  </footer>
+</body>
+</html>
