@@ -10,9 +10,17 @@ layout: default
 </div>
 
 <div class="home-container">
-  <div class="posts-grid">
+  <div class="category-bar" id="category-bar">
+    <button class="cat-tab active" data-cat="all">All Reports</button>
+    {% assign categories = site.posts | map: "category" | uniq | sort %}
+    {% for cat in categories %}
+    <button class="cat-tab" data-cat="{{ cat }}">{{ cat }}</button>
+    {% endfor %}
+  </div>
+
+  <div class="posts-grid" id="posts-grid">
     {% for post in site.posts %}
-    <a href="{{ post.url | relative_url }}" class="post-card">
+    <a href="{{ post.url | relative_url }}" class="post-card" data-category="{{ post.category | default: 'Adversary Intelligence' }}">
       {% if post.cover_image %}
       <div class="card-image">
         <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}">
@@ -31,6 +39,37 @@ layout: default
     </a>
     {% endfor %}
   </div>
+
+  <div class="no-posts-msg" id="no-posts-msg" style="display:none;">No reports found in this category.</div>
 </div>
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('.cat-tab');
+  var cards = document.querySelectorAll('.post-card');
+  var msg = document.getElementById('no-posts-msg');
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+
+      var cat = tab.dataset.cat;
+      var visible = 0;
+
+      cards.forEach(function(card) {
+        if (cat === 'all' || card.dataset.category === cat) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      msg.style.display = visible === 0 ? 'block' : 'none';
+    });
+  });
+})();
+</script>
 
 {{ content }}
