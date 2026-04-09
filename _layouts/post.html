@@ -24,20 +24,11 @@ layout: default
   </div>
   {% endif %}
 
-  <div class="mobile-toc" id="mobile-toc">
-    <button class="mobile-toc-toggle" id="mobile-toc-btn">
-      <span>Table of Contents</span>
-      <span class="mobile-toc-arrow">&#9662;</span>
-    </button>
-    <nav class="mobile-toc-nav" id="mobile-toc-nav"></nav>
-  </div>
-
   <div class="post-container">
     <div class="post-sidebar">
       <div class="toc-wrapper">
         <h4>Table of Contents</h4>
-        <nav class="toc" id="toc">
-        </nav>
+        <nav class="toc" id="toc"></nav>
       </div>
       <div class="author-card">
         <div class="author-info">
@@ -52,6 +43,18 @@ layout: default
     </div>
   </div>
 </article>
+
+<button class="mob-toc-fab" id="mob-toc-fab" aria-label="Table of Contents">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+</button>
+<div class="mob-toc-overlay" id="mob-toc-overlay"></div>
+<div class="mob-toc-sheet" id="mob-toc-sheet">
+  <div class="mob-toc-header">
+    <span>Contents</span>
+    <button class="mob-toc-close" id="mob-toc-close">&times;</button>
+  </div>
+  <nav class="mob-toc-body" id="mob-toc-body"></nav>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -73,25 +76,42 @@ layout: default
     });
     toc.appendChild(list);
 
-    var mobileNav = document.getElementById('mobile-toc-nav');
-    var mobileBtn = document.getElementById('mobile-toc-btn');
-    if (mobileNav) {
-      mobileNav.appendChild(list.cloneNode(true));
-      mobileBtn.addEventListener('click', function() {
-        mobileNav.classList.toggle('open');
-        mobileBtn.classList.toggle('open');
-      });
-      mobileNav.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function(e) {
-          e.preventDefault();
-          var el = document.getElementById(a.getAttribute('href').slice(1));
-          if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
-          mobileNav.classList.remove('open');
-          mobileBtn.classList.remove('open');
-        });
-      });
+    // Mobile bottom sheet TOC
+    var fab = document.getElementById('mob-toc-fab');
+    var sheet = document.getElementById('mob-toc-sheet');
+    var overlay = document.getElementById('mob-toc-overlay');
+    var closeBtn = document.getElementById('mob-toc-close');
+    var body = document.getElementById('mob-toc-body');
+
+    body.appendChild(list.cloneNode(true));
+
+    function openSheet() {
+      sheet.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSheet() {
+      sheet.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
     }
 
+    fab.addEventListener('click', openSheet);
+    closeBtn.addEventListener('click', closeSheet);
+    overlay.addEventListener('click', closeSheet);
+
+    body.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeSheet();
+        var el = document.getElementById(a.getAttribute('href').slice(1));
+        if (el) setTimeout(function() {
+          window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+        }, 200);
+      });
+    });
+
+    // Desktop scroll spy
     var tocLinks = toc.querySelectorAll('a');
     var tocWrap = document.querySelector('.toc-wrapper');
     var pending = false, clicked = false, lastActive = '';
@@ -128,7 +148,7 @@ layout: default
       if (active !== lastActive && !clicked) {
         lastActive = active;
         var activeLink = toc.querySelector('a[data-target="' + active + '"]');
-        if (activeLink) {
+        if (activeLink && tocWrap) {
           var rel = activeLink.offsetTop - 40;
           var st = tocWrap.scrollTop, h = tocWrap.clientHeight;
           if (rel < st || rel > st + h - 30)
