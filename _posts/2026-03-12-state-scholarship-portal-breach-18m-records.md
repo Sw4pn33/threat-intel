@@ -24,7 +24,7 @@ The breach resulted in the exfiltration of approximately **146 gigabytes** of da
 
 The stolen data was subsequently listed for sale on a prominent cybercrime forum for **USD $4,000**, offered as an exclusive "single buyer" sale with escrow protection. The listing included detailed field descriptions and sample data as proof of authenticity.
 
-Through **human intelligence (HUMINT)** gathering, the researcher was able to independently verify the breach claims by identifying critical misconfigurations in the portal's infrastructure. We confirmed that the attack vector exploited **sensitive configuration exposure** combined with **insufficient access controls** on cloud-hosted database services, allowing unauthorized external access to production databases containing the exact dataset described in the forum listing.
+Through **human intelligence (HUMINT)** gathering, I was able to independently verify the breach claims by identifying critical misconfigurations in the portal's infrastructure. I confirmed that the attack vector exploited **sensitive configuration exposure** combined with **insufficient access controls** on cloud-hosted database services, allowing unauthorized external access to production databases containing the exact dataset described in the forum listing.
 
 > **CRITICAL FINDING:** At the time of this report, the underlying vulnerability that enabled the initial breach **has not been fully remediated**. While some access restrictions have been partially implemented, the core misconfiguration that led to the exposure of sensitive infrastructure credentials remains a concern and requires immediate attention.
 
@@ -56,12 +56,12 @@ The affected system is a **unified state scholarship portal** operated by the e-
 |------|-------|
 | **15 Feb 2026** | Threat actor gains unauthorized access to three production database servers and exfiltrates 146 GB of data across 215 tables |
 | **~Late Feb 2026** | Complete dataset is listed for sale on a prominent cybercrime forum, with sample data and schema details provided as proof of access |
-| **~Early Mar 2026** | Through HUMINT, the researcher identifies the dark web listing and begins independent verification |
-| **Mar 2026** | Verification complete. Attack vector and vulnerable infrastructure components are identified and confirmed. This report is compiled |
+| **~Early Mar 2026** | Through HUMINT, I identified the dark web listing and began independent verification |
+| **Mar 2026** | Verification complete. Attack vector and vulnerable infrastructure components identified and confirmed. This report is compiled |
 
 ### Breach Discovery
 
-The breach was discovered through **proactive dark web monitoring and human intelligence operations**. During routine surveillance of cybercrime forums, the researcher identified a listing offering a large-scale Indian government database for sale. Cross-referencing the listing details with publicly available information about government scholarship portals confirmed the target.
+The breach was discovered through **proactive dark web monitoring and human intelligence operations**. During routine surveillance of cybercrime forums, I identified a listing offering a large-scale Indian government database for sale. Cross-referencing the listing details with publicly available information about government scholarship portals confirmed the target.
 
 Subsequent HUMINT-driven investigation led to the independent discovery and verification of the attack vector, confirming that the breach was genuine and the data authentic.
 
@@ -88,7 +88,7 @@ The breach represents one of the largest government data exposures in India in r
 
 ### Database Infrastructure Compromised
 
-The threat actor compromised **three separate database instances**, all hosted as managed PostgreSQL databases on Amazon Web Services (AWS) Relational Database Service (RDS). Our independent verification confirmed the use of AWS RDS infrastructure through examination of exposed configuration artifacts.
+The threat actor compromised **three separate database instances**, all hosted as managed PostgreSQL databases on Amazon Web Services (AWS) Relational Database Service (RDS). My independent verification confirmed the use of AWS RDS infrastructure through examination of exposed configuration artifacts.
 
 The three database instances appear to have served different functional roles within the portal's architecture, including primary application data, secondary/replica data, and administrative/analytical data stores.
 
@@ -496,4 +496,4 @@ Under India's Digital Personal Data Protection Act (DPDPA), 2023, and general da
 
 *This is the public version of the original TLP:AMBER report. All identifying information including portal URLs, database hostnames, credentials, and specific state identification have been redacted. The original classified report is available to authorized parties upon request.*
 
-*All findings are based on open-source intelligence, human intelligence, and independent technical verification. No systems were compromised during this research — the researcher identified and verified the existence of vulnerabilities through observation of publicly accessible artifacts only.*
+*All findings are based on open-source intelligence, human intelligence, and independent technical verification. No systems were compromised during this research — I identified and verified the existence of vulnerabilities through observation of publicly accessible artifacts only.*
