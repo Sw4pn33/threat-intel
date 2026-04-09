@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sw4pn33.github.io/threat-intel/sitemap.xml

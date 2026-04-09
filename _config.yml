@@ -13,6 +13,7 @@ highlighter: rouge
 
 plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 defaults:
   - scope:
