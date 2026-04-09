@@ -7,6 +7,8 @@ permalink: /blog/:title/
 author:
   name: "Sw4pn33"
   role: "Threat Intelligence Researcher"
+  github: "https://github.com/Sw4pn33"
+  linkedin: "https://www.linkedin.com/in/swopna-sarit-barik-75a9a9278/"
 
 markdown: kramdown
 highlighter: rouge
