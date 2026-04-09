@@ -24,6 +24,14 @@ layout: default
   </div>
   {% endif %}
 
+  <div class="mobile-toc" id="mobile-toc">
+    <button class="mobile-toc-toggle" id="mobile-toc-btn">
+      <span>Table of Contents</span>
+      <span class="mobile-toc-arrow">&#9662;</span>
+    </button>
+    <nav class="mobile-toc-nav" id="mobile-toc-nav"></nav>
+  </div>
+
   <div class="post-container">
     <div class="post-sidebar">
       <div class="toc-wrapper">
@@ -64,6 +72,25 @@ layout: default
       list.appendChild(li);
     });
     toc.appendChild(list);
+
+    var mobileNav = document.getElementById('mobile-toc-nav');
+    var mobileBtn = document.getElementById('mobile-toc-btn');
+    if (mobileNav) {
+      mobileNav.appendChild(list.cloneNode(true));
+      mobileBtn.addEventListener('click', function() {
+        mobileNav.classList.toggle('open');
+        mobileBtn.classList.toggle('open');
+      });
+      mobileNav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          var el = document.getElementById(a.getAttribute('href').slice(1));
+          if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+          mobileNav.classList.remove('open');
+          mobileBtn.classList.remove('open');
+        });
+      });
+    }
 
     var tocLinks = toc.querySelectorAll('a');
     var tocWrap = document.querySelector('.toc-wrapper');
