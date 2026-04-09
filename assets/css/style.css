@@ -384,10 +384,58 @@ img { max-width: 100%; height: auto; border-radius: var(--radius); }
 .footer-disclaimer { font-size: 0.78rem; }
 
 /* === RESPONSIVE === */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .post-container { grid-template-columns: 200px 1fr; gap: 2rem; }
+  .toc-wrapper { padding: 1rem; }
+  .toc a { font-size: 0.78rem; }
+  .toc .toc-h3 a { font-size: 0.74rem; }
+}
+
+/* Mobile */
 @media (max-width: 900px) {
-  .post-container { grid-template-columns: 1fr; }
+  .post-container { grid-template-columns: 1fr; padding: 1.5rem 1rem; }
   .post-sidebar { display: none; }
-  .post-title { font-size: 1.75rem; }
-  .home-hero h1 { font-size: 2rem; }
+  .post-title { font-size: 1.5rem; }
+  .post-subtitle { font-size: 0.95rem; }
+  .post-hero { padding: 2.5rem 1rem 2rem; }
+  .post-meta { font-size: 0.8rem; }
+  .post-cover { padding: 0 1rem; }
+  .home-hero { padding: 3rem 1rem 2rem; }
+  .home-hero h1 { font-size: 1.75rem; }
+  .home-hero p { font-size: 0.95rem; }
+  .home-container { padding: 2rem 1rem; }
   .posts-grid { grid-template-columns: 1fr; }
+  .card-image { height: 160px; }
+  .card-content { padding: 1rem; }
+  .card-title { font-size: 1.1rem; }
+  .nav-container { padding: 0 1rem; height: 56px; }
+  .nav-logo { font-size: 0.95rem; gap: 8px; }
+  .logo-icon { min-width: 30px; height: 28px; font-size: 0.85rem; }
+  .logo-text { display: none; }
+  .nav-links a { font-size: 0.85rem; }
+  .post-content h2 { font-size: 1.3rem; margin: 2rem 0 0.75rem; }
+  .post-content h3 { font-size: 1.05rem; }
+  .post-content pre { padding: 0.75rem; font-size: 0.8rem; }
+  .post-content table { font-size: 0.8rem; display: block; overflow-x: auto; white-space: nowrap; }
+  .post-content th { padding: 0.5rem 0.75rem; font-size: 0.7rem; }
+  .post-content td { padding: 0.5rem 0.75rem; }
+  .callout { padding: 1rem; font-size: 0.9rem; }
+  .ioc-block { padding: 0.75rem; font-size: 0.78rem; }
+  .evidence-figure figcaption { font-size: 0.75rem; padding: 0.5rem 0.75rem; }
+  .post-tags { margin-top: 2rem; padding-top: 1rem; }
+  .post-tags span { font-size: 0.72rem; padding: 0.2rem 0.6rem; }
+  .site-footer { padding: 1.5rem 1rem; }
+  .site-footer p { font-size: 0.78rem; }
+  .footer-disclaimer { font-size: 0.7rem; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .post-title { font-size: 1.25rem; }
+  .home-hero h1 { font-size: 1.4rem; }
+  .post-content h2 { font-size: 1.15rem; }
+  .card-image { height: 140px; }
+  .posts-grid { gap: 1rem; }
 }
