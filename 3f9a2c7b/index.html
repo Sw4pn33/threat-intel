@@ -348,7 +348,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
         <div class="field-group">
           <div class="field-group-title">Address</div>
           <div class="field-row"><span class="field-label">Primary</span><span class="field-value">Azad Nagar, Back Side Kapila Prasad High School, Sundarpada, Bhubaneswar, Khordha, Odisha — 751002</span></div>
-          <div class="field-row"><span class="field-label">GPS</span><span class="field-value mono">20.237134°N 85.811414°E</span></div>
+          <div class="field-row"><span class="field-label">GPS</span><span class="field-value mono">20.237134°N 85.811414°E &nbsp;<a href="https://www.google.com/maps?q=20.237134,85.811414" target="_blank" style="background:#1f6feb; color:#fff; padding:2px 9px; border-radius:4px; font-size:10px; text-decoration:none; font-family:sans-serif; margin-left:4px;">View on Maps</a></span></div>
         </div>
         <div class="field-group">
           <div class="field-group-title">Banking</div>
@@ -591,14 +591,13 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
     <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;">
       <div class="sign-box">
         <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">DL Photo — Soleman Khan</div>
-        <div id="s1-big-photo" style="width:120px; height:140px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px; text-align:center; padding:10px;">
-          Photo<br>(add soleman_photo.jpg)
-        </div>
+        <img src="docs/soleman_photo.jpg" style="width:120px; height:140px; border-radius:8px; object-fit:cover; border:2px solid var(--border);" onerror="this.style.display='none'; document.getElementById('s1-photo-fallback').style.display='flex';" alt="Soleman Khan Photo">
+        <div id="s1-photo-fallback" style="width:120px; height:140px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:none; align-items:center; justify-content:center; color:var(--muted); font-size:11px; text-align:center; padding:8px;">Photo not found</div>
       </div>
       <div class="sign-box">
         <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Signature — Soleman Khan</div>
-        <img id="s1-sign-img" src="docs/soleman_sign.png" class="sign-img" onerror="this.style.display='none'; document.getElementById('s1-sign-fallback').style.display='flex';" alt="Signature">
-        <div id="s1-sign-fallback" style="width:260px; height:90px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px;">add soleman_sign.png to docs/</div>
+        <img id="s1-sign-img" src="docs/soleman_sign.png" class="sign-img" style="max-width:260px; max-height:90px; background:#fff; border-radius:6px; padding:6px;" onerror="this.style.display='none'; document.getElementById('s1-sign-fallback').style.display='flex';" alt="Signature">
+        <div id="s1-sign-fallback" style="width:260px; height:90px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:none; align-items:center; justify-content:center; color:var(--muted); font-size:11px;">Signature not found</div>
       </div>
     </div>
 
@@ -635,7 +634,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
           <div class="field-row"><span class="field-label">Reported Date</span><span class="field-value">31 Oct 2022</span></div>
           <div class="field-row"><span class="field-label">WhatsApp</span><span class="field-value">Active</span></div>
           <div class="field-row"><span class="field-label">Primary Address</span><span class="field-value">AZAD NAGAR, BACK SIDE OF KAPILA PRASAD HIGH SCHOOL, SUNDARPADA, BHUBANESWAR, KHORDHA — 751002</span></div>
-          <div class="field-row"><span class="field-label">GPS</span><span class="field-value mono">20.237134°N, 85.811414°E</span></div>
+          <div class="field-row"><span class="field-label">GPS</span><span class="field-value mono">20.237134°N, 85.811414°E &nbsp;<a href="https://www.google.com/maps?q=20.237134,85.811414" target="_blank" style="background:#1f6feb; color:#fff; padding:2px 9px; border-radius:4px; font-size:10px; text-decoration:none; font-family:sans-serif;">View on Maps</a></span></div>
         </div>
         <div class="field-group">
           <div class="field-group-title">Banking</div>
@@ -702,7 +701,18 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
           <div class="field-row"><span class="field-label">Operator</span><span class="field-value">Airtel, Prepaid, Odisha</span></div>
           <div class="field-row"><span class="field-label">WhatsApp</span><span class="field-value">Active</span></div>
           <div class="field-row"><span class="field-label">Email</span><span class="field-value">sarafatkhan16@gmail.com</span></div>
-          <div class="field-row"><span class="field-label">Google Gaia ID</span><span class="field-value mono">115932601866432962513</span></div>
+          <div class="field-row" style="align-items:flex-start;">
+            <span class="field-label">Google Gaia ID</span>
+            <span class="field-value">
+              <span class="mono">115932601866432962513</span><br>
+              <div style="display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; align-items:center;">
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocJ115932601866432962513" style="width:44px; height:44px; border-radius:50%; border:2px solid var(--border); background:var(--surface3);" onerror="this.style.display='none'" alt="Google Profile">
+                <a href="https://www.google.com/maps/contrib/115932601866432962513" target="_blank" style="background:#1f6feb; color:#fff; padding:4px 10px; border-radius:4px; font-size:11px; text-decoration:none;">Maps Profile</a>
+                <a href="https://www.google.com/maps/contrib/115932601866432962513/reviews" target="_blank" style="background:#1c2333; color:#58a6ff; border:1px solid #30363d; padding:4px 10px; border-radius:4px; font-size:11px; text-decoration:none;">Reviews</a>
+                <a href="https://profiles.google.com/115932601866432962513" target="_blank" style="background:#1c2333; color:#8b949e; border:1px solid #30363d; padding:4px 10px; border-radius:4px; font-size:11px; text-decoration:none;">G+ Profile</a>
+              </div>
+            </span>
+          </div>
           <div class="field-row"><span class="field-label">Last Google Activity</span><span class="field-value warning">22 April 2026</span></div>
         </div>
         <div class="field-group">
@@ -744,7 +754,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
       <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;">
         <span style="background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px;">MAMTAZ BEGUM</span>
         <span style="background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px;">SADATUL BIBI</span>
-        <span style="background:var(--surface3); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px; color:var(--muted);">+12 additional names in network</span>
+        <span style="background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px;">MANSUR KHAN (guardian)</span>
+        <span style="background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px;">KHAN SARAFAT</span>
+        <span style="background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px;">SARAFAT KHAN</span>
+        <span style="background:var(--surface3); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px; color:var(--muted); font-style:italic;">Further names available via credit bureau / bureau lookup</span>
       </div>
     </div>
   </div>
@@ -767,8 +780,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
     <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;">
       <div class="sign-box">
         <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Aadhaar Card Photo — Sk Rijuwan Alli</div>
-        <img id="s3-aadhaar-img" src="docs/rijuwan_aadhaar.jpg" style="max-width:340px; border-radius:8px; border:2px solid var(--border);" onerror="this.style.display='none'; document.getElementById('s3-aadh-fallback').style.display='flex';" alt="Aadhaar Card">
-        <div id="s3-aadh-fallback" style="width:340px; height:210px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px;">add rijuwan_aadhaar.jpg to docs/</div>
+        <img id="s3-aadhaar-img" src="docs/rijuwan_aadhaar.jpg" style="max-width:420px; border-radius:8px; border:2px solid var(--border);" onerror="this.style.display='none'; document.getElementById('s3-aadh-fallback').style.display='flex';" alt="Aadhaar Card">
+        <div id="s3-aadh-fallback" style="width:340px; height:210px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:none; align-items:center; justify-content:center; color:var(--muted); font-size:11px;">Aadhaar card not found</div>
       </div>
     </div>
 
@@ -807,7 +820,18 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
           <div class="field-row"><span class="field-label">Ported</span><span class="field-value">No</span></div>
           <div class="field-row"><span class="field-label">Email 1</span><span class="field-value">skrijuwan64@gmail.com</span></div>
           <div class="field-row"><span class="field-label">Email 2</span><span class="field-value">rijwanali34948@gmail.com</span></div>
-          <div class="field-row"><span class="field-label">Google Gaia ID</span><span class="field-value mono">113789573325322595446</span></div>
+          <div class="field-row" style="align-items:flex-start;">
+            <span class="field-label">Google Gaia ID</span>
+            <span class="field-value">
+              <span class="mono">113789573325322595446</span><br>
+              <div style="display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; align-items:center;">
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocJ113789573325322595446" style="width:44px; height:44px; border-radius:50%; border:2px solid var(--border); background:var(--surface3);" onerror="this.style.display='none'" alt="Google Profile">
+                <a href="https://www.google.com/maps/contrib/113789573325322595446" target="_blank" style="background:#1f6feb; color:#fff; padding:4px 10px; border-radius:4px; font-size:11px; text-decoration:none;">Maps Profile</a>
+                <a href="https://www.google.com/maps/contrib/113789573325322595446/reviews" target="_blank" style="background:#1c2333; color:#58a6ff; border:1px solid #30363d; padding:4px 10px; border-radius:4px; font-size:11px; text-decoration:none;">Reviews</a>
+                <a href="https://profiles.google.com/113789573325322595446" target="_blank" style="background:#1c2333; color:#8b949e; border:1px solid #30363d; padding:4px 10px; border-radius:4px; font-size:11px; text-decoration:none;">G+ Profile</a>
+              </div>
+            </span>
+          </div>
           <div class="field-row"><span class="field-label">Last Google Activity</span><span class="field-value">18 March 2024</span></div>
           <div class="field-row"><span class="field-label">Facebook ID</span><span class="field-value mono">100026731551140</span></div>
           <div class="field-row"><span class="field-label">FB Description</span><span class="field-value">Young male, white kurta, sunglasses</span></div>
@@ -902,6 +926,27 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
         <div class="rc-foot">
           <span class="validity-tag valid-ok">Valid till 2039</span>
           <span class="fuel-ev">PURE EV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RC PDF originals -->
+    <div style="margin-top:28px;">
+      <div class="section-title" style="font-size:14px; margin-bottom:14px;">&#128196; Original RC Documents</div>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="doc-name">RC — OD02BX2992 (Soleman Khan / Hero HF Deluxe)</span>
+            <a class="doc-download" href="docs/RC_OD02BX2992.pdf" download>Download</a>
+          </div>
+          <iframe class="pdf-frame" src="docs/RC_OD02BX2992.pdf" style="height:560px;"></iframe>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="doc-name">RC — OD13W6626 (Sk Rijuwan Alli / Bajaj Chetak EV)</span>
+            <a class="doc-download" href="docs/RC_OD13W6626.pdf" download>Download</a>
+          </div>
+          <iframe class="pdf-frame" src="docs/RC_OD13W6626.pdf" style="height:560px;"></iframe>
         </div>
       </div>
     </div>
