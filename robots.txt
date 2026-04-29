@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /3f9a2c7b/
 Sitemap: https://sw4pn33.github.io/threat-intel/sitemap.xml

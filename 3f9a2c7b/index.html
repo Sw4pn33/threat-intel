@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>INT REF OD-2026-C42 | Restricted</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2333;
+  --surface3: #21262d;
+  --border: #30363d;
+  --accent: #58a6ff;
+  --accent2: #1f6feb;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --danger: #ff4444;
+  --danger-bg: #2d1b1b;
+  --warning: #f0883e;
+  --warning-bg: #2d1f0f;
+  --success: #3fb950;
+  --gold: #d29922;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.5; }
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  position: sticky; top: 0; z-index: 100;
+}
+.header-top {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+  border-bottom: 2px solid var(--accent2);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header-brand { display: flex; align-items: center; gap: 12px; }
+.header-brand .logo-text { font-size: 18px; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
+.header-brand .sub { font-size: 11px; color: var(--muted); display: block; }
+.header-meta { text-align: right; font-size: 11px; color: var(--muted); }
+.header-meta strong { color: var(--danger); display: block; font-size: 13px; letter-spacing: 2px; }
+
+.nav-tabs { display: flex; overflow-x: auto; gap: 0; padding: 0 24px; background: var(--surface); }
+.nav-tab { padding: 10px 18px; cursor: pointer; font-size: 12px; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.2s; }
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* ── COVER BANNER ── */
+.cover-banner {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 60%, #1c2333 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.cover-banner::before {
+  content: 'CONFIDENTIAL';
+  position: absolute; right: -20px; top: 30px;
+  font-size: 80px; font-weight: 900; color: rgba(255,68,68,0.04);
+  transform: rotate(-30deg); pointer-events: none;
+  letter-spacing: 8px;
+}
+.cover-title { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.cover-title span { color: var(--accent); }
+.cover-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.cover-meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.meta-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; }
+.meta-card .label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+.meta-card .value { font-size: 14px; font-weight: 600; color: var(--text); }
+.meta-card.danger .value { color: var(--danger); }
+.meta-card.warning .value { color: var(--warning); }
+.meta-card.accent .value { color: var(--accent); }
+
+/* ── ALERT BANNER ── */
+.alert { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; }
+.alert.critical { background: var(--danger-bg); border: 1px solid #5a1e1e; }
+.alert.warning { background: var(--warning-bg); border: 1px solid #5a3a0f; }
+.alert .alert-icon { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+.alert.critical .alert-icon { color: var(--danger); }
+.alert.warning .alert-icon { color: var(--warning); }
+.alert .alert-title { font-weight: 700; color: var(--danger); margin-bottom: 3px; }
+.alert.warning .alert-title { color: var(--warning); }
+.alert .alert-body { color: var(--text); }
+
+/* ── SUBJECT CARDS ── */
+.subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; margin-bottom: 24px; }
+.subject-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.subject-card.s1 { border-top: 3px solid var(--accent); }
+.subject-card.s2 { border-top: 3px solid var(--danger); }
+.subject-card.s3 { border-top: 3px solid var(--gold); }
+
+.subject-header { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--surface2); }
+.subject-photo-wrap { position: relative; flex-shrink: 0; }
+.subject-photo { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; border: 2px solid var(--border); background: var(--surface3); display: flex; align-items: center; justify-content: center; }
+.subject-photo img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+.subject-photo-placeholder { width: 80px; height: 80px; border-radius: 8px; background: var(--surface3); border: 2px dashed var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 22px; color: var(--muted); }
+.badge-number { position: absolute; top: -6px; left: -6px; width: 22px; height: 22px; background: var(--accent); border-radius: 50%; font-size: 11px; font-weight: 700; color: #000; display: flex; align-items: center; justify-content: center; }
+.s2 .badge-number { background: var(--danger); color: #fff; }
+.s3 .badge-number { background: var(--gold); color: #000; }
+.subject-info { flex: 1; min-width: 0; }
+.subject-name { font-size: 16px; font-weight: 700; color: #fff; }
+.subject-mobile { font-size: 12px; color: var(--accent); margin-top: 2px; }
+.subject-operator { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.exposure-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-top: 6px; }
+.exp-low { background: rgba(63,185,80,0.15); color: var(--success); }
+.exp-med { background: rgba(240,136,62,0.15); color: var(--warning); }
+.exp-high { background: rgba(255,68,68,0.15); color: var(--danger); }
+
+.subject-body { padding: 20px; }
+.field-group { margin-bottom: 16px; }
+.field-group-title { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+.field-row { display: flex; gap: 8px; margin-bottom: 5px; font-size: 12.5px; }
+.field-label { color: var(--muted); min-width: 110px; flex-shrink: 0; }
+.field-value { color: var(--text); font-weight: 500; word-break: break-word; }
+.field-value.mono { font-family: 'Courier New', monospace; font-size: 12px; }
+.field-value.danger { color: var(--danger); font-weight: 700; }
+.field-value.warning { color: var(--warning); }
+.field-value.accent { color: var(--accent); }
+
+.flag-list { list-style: none; }
+.flag-list li { display: flex; align-items: flex-start; gap: 8px; padding: 6px 10px; border-radius: 6px; margin-bottom: 4px; font-size: 12px; }
+.flag-list li.danger { background: var(--danger-bg); color: var(--text); }
+.flag-list li.warning { background: var(--warning-bg); color: var(--text); }
+.flag-list li .fi { flex-shrink: 0; margin-top: 1px; }
+
+/* ── SECTION HEADERS ── */
+.section { margin-bottom: 32px; }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.section-title .sect-icon { font-size: 18px; }
+.section-badge { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+.badge-critical { background: rgba(255,68,68,0.15); color: var(--danger); }
+.badge-high { background: rgba(240,136,62,0.15); color: var(--warning); }
+
+/* ── LINK ANALYSIS ── */
+.link-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+.link-header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; }
+.link-header:hover { background: var(--surface2); }
+.link-severity { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; letter-spacing: 1px; }
+.sev-critical { background: rgba(255,68,68,0.2); color: var(--danger); border: 1px solid rgba(255,68,68,0.3); }
+.sev-high { background: rgba(240,136,62,0.2); color: var(--warning); border: 1px solid rgba(240,136,62,0.3); }
+.sev-medium { background: rgba(210,153,34,0.2); color: var(--gold); border: 1px solid rgba(210,153,34,0.3); }
+.sev-low { background: rgba(139,148,158,0.2); color: var(--muted); border: 1px solid rgba(139,148,158,0.3); }
+.link-title { font-size: 13px; font-weight: 600; color: var(--text); flex: 1; }
+.link-chevron { color: var(--muted); font-size: 12px; transition: transform 0.2s; }
+.link-body { padding: 0 18px 16px 18px; font-size: 13px; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--border); padding-top: 12px; display: none; }
+.link-card.open .link-body { display: block; }
+.link-card.open .link-chevron { transform: rotate(180deg); }
+
+/* ── RC CARDS ── */
+.rc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+.rc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.rc-card-head { background: linear-gradient(135deg, #1a2744 0%, #1c2333 100%); padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.rc-reg-num { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: 2px; font-family: 'Courier New', monospace; }
+.rc-type { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.rc-body { padding: 16px 20px; }
+.rc-field { display: flex; gap: 10px; margin-bottom: 7px; font-size: 12.5px; }
+.rc-label { color: var(--muted); min-width: 130px; flex-shrink: 0; }
+.rc-value { color: var(--text); font-weight: 500; font-family: 'Courier New', monospace; font-size: 12px; }
+.rc-foot { padding: 12px 20px; background: var(--surface2); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.validity-tag { font-size: 11px; padding: 4px 12px; border-radius: 20px; }
+.valid-ok { background: rgba(63,185,80,0.15); color: var(--success); }
+.fuel-ev { background: rgba(88,166,255,0.15); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 11px; }
+.fuel-petrol { background: rgba(240,136,62,0.15); color: var(--warning); padding: 4px 12px; border-radius: 20px; font-size: 11px; }
+
+/* ── CHALLAN ── */
+.challan-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.challan-table th { background: var(--surface2); color: var(--muted); font-weight: 600; padding: 10px 12px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+.challan-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.challan-table tr:last-child td { border-bottom: none; }
+.challan-table tr:hover td { background: var(--surface2); }
+.pending-tag { background: rgba(255,68,68,0.15); color: var(--danger); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.challan-ref { font-family: 'Courier New', monospace; font-size: 11px; color: var(--accent); }
+.challan-total { background: var(--surface2); padding: 10px 12px; border-top: 2px solid var(--danger); font-size: 13px; font-weight: 700; color: var(--danger); text-align: right; border-radius: 0 0 8px 8px; }
+
+/* ── GST SECTION ── */
+.gst-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.gst-head { background: linear-gradient(135deg, #1e2a1a 0%, #1c2333 100%); padding: 20px; border-bottom: 1px solid var(--border); }
+.gst-num { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: var(--success); font-family: 'Courier New', monospace; }
+.gst-biz { font-size: 16px; font-weight: 700; color: #fff; margin-top: 4px; }
+.gst-legal { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.gst-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0; }
+.gst-col { padding: 20px; border-right: 1px solid var(--border); }
+.gst-col:last-child { border-right: none; }
+.gst-filing-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.gst-filing-table th { color: var(--muted); text-align: left; padding: 6px 10px; font-size: 11px; text-transform: uppercase; background: var(--surface2); }
+.gst-filing-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.filed-tag { background: rgba(63,185,80,0.15); color: var(--success); padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+
+/* ── PAN SECTION ── */
+.pan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.pan-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.pan-head { background: var(--surface2); padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+.pan-num { font-family: 'Courier New', monospace; font-size: 16px; font-weight: 800; color: var(--accent); }
+.pan-status { font-size: 10px; padding: 3px 10px; border-radius: 20px; background: rgba(63,185,80,0.15); color: var(--success); font-weight: 700; }
+.pan-body { padding: 16px 18px; }
+
+/* ── CREDIT BUREAU ── */
+.bureau-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
+.bureau-head { padding: 16px 20px; background: var(--surface2); border-bottom: 1px solid var(--border); border-radius: 12px 12px 0 0; display: flex; align-items: center; justify-content: space-between; }
+.bureau-name { font-size: 15px; font-weight: 700; }
+.bureau-body { padding: 20px; }
+.addr-timeline { list-style: none; }
+.addr-timeline li { display: flex; gap: 12px; margin-bottom: 12px; }
+.addr-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); margin-top: 4px; flex-shrink: 0; }
+.addr-info { flex: 1; }
+.addr-text { font-size: 12.5px; color: var(--text); }
+.addr-date { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.addr-type { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: var(--surface2); color: var(--muted); display: inline-block; margin-top: 3px; }
+
+/* ── DOC VIEWER ── */
+.doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.doc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.doc-card-head { padding: 12px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.doc-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.doc-download { background: var(--accent2); color: #fff; border: none; padding: 5px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; text-decoration: none; display: inline-block; }
+.doc-download:hover { background: #1a5fbf; }
+.pdf-frame { width: 100%; height: 480px; border: none; background: #fff; }
+
+/* ── SIGNATURE SECTION ── */
+.sign-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: inline-flex; flex-direction: column; align-items: center; gap: 10px; }
+.sign-img { max-width: 260px; max-height: 90px; filter: invert(1); background: transparent; }
+.sign-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+/* ── TABS ── */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── FOOTER ── */
+.site-footer { background: var(--surface); border-top: 1px solid var(--border); padding: 20px 24px; margin-top: 40px; text-align: center; }
+.footer-text { font-size: 11px; color: var(--muted); line-height: 1.7; }
+.footer-case { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+
+/* ── PRINT ── */
+@media print {
+  .nav-tabs, .site-footer .doc-download { display: none; }
+  .tab-content { display: block !important; }
+  body { background: #fff; color: #000; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 12px; }
+  .cover-banner { padding: 20px; }
+  .cover-title { font-size: 20px; }
+  .subject-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="header-top">
+    <div class="header-brand">
+      <div>
+        <div class="logo-text">CHAKRA OSINT</div>
+        <span class="sub">Intelligence Platform — Law Enforcement Division</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <strong>RESTRICTED</strong>
+      Case: CHK-2026-OD-0042 &nbsp;|&nbsp; 29 April 2026
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showTab('summary')">Overview</div>
+    <div class="nav-tab" onclick="showTab('links')">Link Analysis</div>
+    <div class="nav-tab" onclick="showTab('s1')">Subject 1 — Soleman</div>
+    <div class="nav-tab" onclick="showTab('s2')">Subject 2 — Sarafat</div>
+    <div class="nav-tab" onclick="showTab('s3')">Subject 3 — Rijuwan</div>
+    <div class="nav-tab" onclick="showTab('vehicles')">Vehicles & RC</div>
+    <div class="nav-tab" onclick="showTab('challans')">Challans</div>
+    <div class="nav-tab" onclick="showTab('gst')">GST / Business</div>
+    <div class="nav-tab" onclick="showTab('pan')">PAN & Bureau</div>
+    <div class="nav-tab" onclick="showTab('docs')">Original Documents</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════ TAB: SUMMARY ══════════════════ -->
+<div class="tab-content active" id="tab-summary">
+
+  <div class="cover-banner">
+    <div class="cover-title">Multi-Subject <span>OSINT Investigation</span> Report</div>
+    <div class="cover-sub">Soleman Khan &nbsp;·&nbsp; Sarafat Khan &nbsp;·&nbsp; Sk Rijuwan Alli &nbsp;|&nbsp; Odisha, India</div>
+    <div class="cover-meta-grid">
+      <div class="meta-card danger"><div class="label">Threat Level</div><div class="value">HIGH</div></div>
+      <div class="meta-card"><div class="label">Case Reference</div><div class="value">CHK-2026-OD-0042</div></div>
+      <div class="meta-card"><div class="label">Jurisdiction</div><div class="value">Odisha, India</div></div>
+      <div class="meta-card accent"><div class="label">Subjects</div><div class="value">3 Persons of Interest</div></div>
+      <div class="meta-card warning"><div class="label">Links Identified</div><div class="value">7 Connection Points</div></div>
+      <div class="meta-card"><div class="label">Report Date</div><div class="value">29 April 2026</div></div>
+    </div>
+  </div>
+
+  <div class="alert critical">
+    <div class="alert-icon">&#9888;</div>
+    <div>
+      <div class="alert-title">CRITICAL — DOCUMENT FRAUD INDICATOR</div>
+      <div class="alert-body">DL Number <strong>OD02K20230006858</strong> is simultaneously linked to both <strong>SOLEMAN KHAN</strong> (Subject-1) and <strong>SARAFAT KHAN</strong> (Subject-2). A single DL cannot legally belong to two persons. This constitutes a prima facie indicator of Driving Licence forgery or unlawful issuance — immediate RTO Bhubaneswar (OD02) verification required.</div>
+    </div>
+  </div>
+
+  <div class="alert warning">
+    <div class="alert-icon">&#9888;</div>
+    <div>
+      <div class="alert-title">ALERT — FRESH GST REGISTRATION</div>
+      <div class="alert-body">Sarafat Khan registered <strong>MS ENTERPRISES</strong> (GSTIN: 21CTNPK0785J1ZG) on 01 March 2026 — just weeks before this investigation. Business registered at <strong>Narsinghpur, Pipili</strong>. Contact email "incorrectibran@gmail.com" is anomalous and likely a burner address. First GST returns (GSTR-1 and GSTR-3B) filed on 16 April 2026 for March 2026.</div>
+    </div>
+  </div>
+
+  <!-- Subject Summary Cards -->
+  <div class="subject-grid">
+
+    <!-- S1 -->
+    <div class="subject-card s1">
+      <div class="subject-header">
+        <div class="subject-photo-wrap">
+          <div class="subject-photo-placeholder" id="s1-photo-wrap">&#128100;</div>
+          <div class="badge-number">1</div>
+        </div>
+        <div class="subject-info">
+          <div class="subject-name">SOLEMAN KHAN</div>
+          <div class="subject-mobile">+91-9348578977</div>
+          <div class="subject-operator">Jio &nbsp;|&nbsp; Prepaid &nbsp;|&nbsp; Odisha &nbsp;|&nbsp; Not Ported</div>
+          <span class="exposure-badge exp-med">Digital Exposure: 52%</span>
+        </div>
+      </div>
+      <div class="subject-body">
+        <div class="field-group">
+          <div class="field-group-title">Identity</div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">23 April 2000 (Age 26)</span></div>
+          <div class="field-row"><span class="field-label">Father</span><span class="field-value">JAMALU KHAN</span></div>
+          <div class="field-row"><span class="field-label">PAN</span><span class="field-value mono accent">IRJPK4750H</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar (masked)</span><span class="field-value mono">20XXXXXXXX07</span></div>
+          <div class="field-row"><span class="field-label">DL Number</span><span class="field-value mono danger">OD02K20230006858 &#9888;</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Address</div>
+          <div class="field-row"><span class="field-label">Primary</span><span class="field-value">Azad Nagar, Back Side Kapila Prasad High School, Sundarpada, Bhubaneswar, Khordha, Odisha — 751002</span></div>
+          <div class="field-row"><span class="field-label">GPS</span><span class="field-value mono">20.237134°N 85.811414°E</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Banking</div>
+          <div class="field-row"><span class="field-label">Bank</span><span class="field-value">Bank of India</span></div>
+          <div class="field-row"><span class="field-label">IFSC</span><span class="field-value mono">BKID0005559</span></div>
+          <div class="field-row"><span class="field-label">Branch</span><span class="field-value">Kapila Prasad Market Complex, Bhubaneswar</span></div>
+          <div class="field-row"><span class="field-label">UPI</span><span class="field-value mono">9348578977@axl</span></div>
+        </div>
+        <ul class="flag-list">
+          <li class="danger"><span class="fi">&#9888;</span> Shared DL with Subject-2 — Document fraud indicator</li>
+          <li class="warning"><span class="fi">&#9888;</span> 3 pending traffic challans (Rs 2,500 total) on OD02BX2992</li>
+          <li class="warning"><span class="fi">&#9888;</span> Alias "SALMAN KHAN" in Corona breach database</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- S2 -->
+    <div class="subject-card s2">
+      <div class="subject-header">
+        <div class="subject-photo-wrap">
+          <div class="subject-photo-placeholder">&#128100;</div>
+          <div class="badge-number">2</div>
+        </div>
+        <div class="subject-info">
+          <div class="subject-name">SARAFAT KHAN</div>
+          <div class="subject-mobile">+91-7978639986</div>
+          <div class="subject-operator">Airtel &nbsp;|&nbsp; Prepaid &nbsp;|&nbsp; Odisha &nbsp;|&nbsp; Not Ported</div>
+          <span class="exposure-badge exp-med">Digital Exposure: 69%</span>
+        </div>
+      </div>
+      <div class="subject-body">
+        <div class="field-group">
+          <div class="field-group-title">Identity</div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">06 July 1990 (Age 35)</span></div>
+          <div class="field-row"><span class="field-label">Guardian</span><span class="field-value">C/O MANSUR KHAN (per credit bureau)</span></div>
+          <div class="field-row"><span class="field-label">PAN</span><span class="field-value mono accent">CTNPK0785J</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar (masked)</span><span class="field-value mono">XXXXXXXX3178</span></div>
+          <div class="field-row"><span class="field-label">Other ID</span><span class="field-value mono">30028128578872</span></div>
+          <div class="field-row"><span class="field-label">DL Number</span><span class="field-value mono danger">OD02K20230006858 &#9888; DUPLICATE</span></div>
+          <div class="field-row"><span class="field-label">Occupation</span><span class="field-value">SALARIED &nbsp;|&nbsp; Income: Rs 43,530</span></div>
+          <div class="field-row"><span class="field-label">Sole Proprietor</span><span class="field-value warning">YES (MS ENTERPRISES)</span></div>
+          <div class="field-row"><span class="field-label">Alt Mobile</span><span class="field-value mono">9776608786 (prev. reported)</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Address</div>
+          <div class="field-row"><span class="field-label">Primary</span><span class="field-value">Ward No-6, Narshinghpur, Pipili, Puri, Odisha — 752104</span></div>
+          <div class="field-row"><span class="field-label">Email</span><span class="field-value">sarafatkhan16@gmail.com</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Banking</div>
+          <div class="field-row"><span class="field-label">Bank</span><span class="field-value">State Bank of India</span></div>
+          <div class="field-row"><span class="field-label">IFSC</span><span class="field-value mono">SBIN0002102</span></div>
+          <div class="field-row"><span class="field-label">Branch</span><span class="field-value">Pipli</span></div>
+          <div class="field-row"><span class="field-label">UPI IDs</span><span class="field-value mono">khan.sarafat4@ybl + 5 others</span></div>
+        </div>
+        <ul class="flag-list">
+          <li class="danger"><span class="fi">&#9888;</span> Shared DL with Subject-1 — Document fraud indicator</li>
+          <li class="danger"><span class="fi">&#9888;</span> Fresh GST registration (01 Mar 2026) — potential money vehicle</li>
+          <li class="warning"><span class="fi">&#9888;</span> 6+ UPI IDs — fragmented financials, possible layering</li>
+          <li class="warning"><span class="fi">&#9888;</span> GST email "incorrectibran@gmail.com" — anomalous burner address</li>
+          <li class="warning"><span class="fi">&#9888;</span> Google account active 22 April 2026 — recent digital activity</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- S3 -->
+    <div class="subject-card s3">
+      <div class="subject-header">
+        <div class="subject-photo-wrap">
+          <div class="subject-photo-placeholder" id="s3-photo-wrap">&#128100;</div>
+          <div class="badge-number">3</div>
+        </div>
+        <div class="subject-info">
+          <div class="subject-name">SK RIJUWAN ALLI</div>
+          <div class="subject-mobile">+91-9090035592</div>
+          <div class="subject-operator">Airtel &nbsp;|&nbsp; Prepaid &nbsp;|&nbsp; Odisha &nbsp;|&nbsp; Not Ported</div>
+          <span class="exposure-badge exp-high">Digital Exposure: 74%</span>
+        </div>
+      </div>
+      <div class="subject-body">
+        <div class="field-group">
+          <div class="field-group-title">Identity</div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">09 August 2000 (Age 25)</span></div>
+          <div class="field-row"><span class="field-label">Father</span><span class="field-value">SK JABAR</span></div>
+          <div class="field-row"><span class="field-label">PAN</span><span class="field-value mono accent">ERLPA9379A</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar</span><span class="field-value mono">2286 3126 1600</span></div>
+          <div class="field-row"><span class="field-label">VID</span><span class="field-value mono">9100 9665 5409 2299</span></div>
+          <div class="field-row"><span class="field-label">Enrolment ID</span><span class="field-value mono">2189/76088/89419</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Issued</span><span class="field-value">06 March 2013</span></div>
+          <div class="field-row"><span class="field-label">Other ID</span><span class="field-value mono">50041983462512</span></div>
+          <div class="field-row"><span class="field-label">Gender</span><span class="field-value">Male</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Address</div>
+          <div class="field-row"><span class="field-label">Primary</span><span class="field-value">Somanapradhan, Biswalpada B.O, Biswalpada, Balipatna, Khordha, Odisha — 752114</span></div>
+          <div class="field-row"><span class="field-label">Landmark</span><span class="field-value">Near Somanapradhan UP School</span></div>
+          <div class="field-row"><span class="field-label">Email</span><span class="field-value">skrijuwan64@gmail.com &nbsp;/&nbsp; rijwanali34948@gmail.com</span></div>
+          <div class="field-row"><span class="field-label">Facebook ID</span><span class="field-value mono">100026731551140</span></div>
+          <div class="field-row"><span class="field-label">Google Gaia ID</span><span class="field-value mono">113789573325322595446</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Banking</div>
+          <div class="field-row"><span class="field-label">Primary Bank</span><span class="field-value">Punjab National Bank</span></div>
+          <div class="field-row"><span class="field-label">IFSC</span><span class="field-value mono">PUNB0796800</span></div>
+          <div class="field-row"><span class="field-label">Branch</span><span class="field-value">Haripur, Puri</span></div>
+          <div class="field-row"><span class="field-label">UPI IDs</span><span class="field-value mono">skrijuwan64@ibl + Axis + Airtel</span></div>
+        </div>
+        <ul class="flag-list">
+          <li class="danger"><span class="fi">&#9888;</span> Highest digital exposure (74%) — most data-retrievable subject</li>
+          <li class="warning"><span class="fi">&#9888;</span> 3 separate bank accounts — possible money mule pattern</li>
+          <li class="warning"><span class="fi">&#9888;</span> Two active email accounts — split identity profile</li>
+          <li class="warning"><span class="fi">&#9888;</span> EV vehicle (Bajaj Chetak) — atypical for socioeconomic profile</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /subject-grid -->
+</div><!-- /tab-summary -->
+
+<!-- ══════════════════ TAB: LINK ANALYSIS ══════════════════ -->
+<div class="tab-content" id="tab-links">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#128279;</span> Connection & Link Analysis <span class="section-badge badge-critical">7 Links</span></div>
+
+    <!-- Matrix -->
+    <div style="overflow-x:auto; margin-bottom:24px;">
+      <table style="width:100%; border-collapse:collapse; font-size:12px;">
+        <thead>
+          <tr style="background:var(--surface2);">
+            <th style="padding:10px 14px; color:var(--muted); text-align:left; border:1px solid var(--border);">FROM \ TO</th>
+            <th style="padding:10px 14px; color:var(--accent); text-align:center; border:1px solid var(--border);">SOLEMAN KHAN</th>
+            <th style="padding:10px 14px; color:var(--danger); text-align:center; border:1px solid var(--border);">SARAFAT KHAN</th>
+            <th style="padding:10px 14px; color:var(--gold); text-align:center; border:1px solid var(--border);">SK RIJUWAN ALLI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:10px 14px; font-weight:600; background:var(--surface); border:1px solid var(--border); color:var(--accent);">SOLEMAN KHAN</td>
+            <td style="padding:10px 14px; text-align:center; color:var(--muted); border:1px solid var(--border); background:var(--surface2);">—</td>
+            <td style="padding:10px 14px; text-align:center; border:1px solid var(--border); background:var(--danger-bg); color:var(--danger); font-weight:700;">Shared DL OD02K20230006858 &#9888;</td>
+            <td style="padding:10px 14px; text-align:center; border:1px solid var(--border); color:var(--gold);">Same birth year (2000), &lt;50 km proximity</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px; font-weight:600; background:var(--surface); border:1px solid var(--border); color:var(--danger);">SARAFAT KHAN</td>
+            <td style="padding:10px 14px; text-align:center; border:1px solid var(--border); background:var(--danger-bg); color:var(--danger); font-weight:700;">Shared DL OD02K20230006858 &#9888;</td>
+            <td style="padding:10px 14px; text-align:center; color:var(--muted); border:1px solid var(--border); background:var(--surface2);">—</td>
+            <td style="padding:10px 14px; text-align:center; border:1px solid var(--border); color:var(--gold);">GST address overlaps Khordha corridor</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px; font-weight:600; background:var(--surface); border:1px solid var(--border); color:var(--gold);">SK RIJUWAN ALLI</td>
+            <td style="padding:10px 14px; text-align:center; border:1px solid var(--border); color:var(--gold);">Same birth year (2000), geographic cluster</td>
+            <td style="padding:10px 14px; text-align:center; border:1px solid var(--border); color:var(--gold);">Puri district overlap, financial fragmentation pattern</td>
+            <td style="padding:10px 14px; text-align:center; color:var(--muted); border:1px solid var(--border); background:var(--surface2);">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Link cards -->
+    <div class="link-card open">
+      <div class="link-header" onclick="toggleLink(this)">
+        <span class="link-severity sev-critical">CRITICAL</span>
+        <span class="link-title">01 &nbsp; Shared Driving Licence — OD02K20230006858</span>
+        <span class="link-chevron">&#9660;</span>
+      </div>
+      <div class="link-body">Subject-1 (Soleman Khan) and Subject-2 (Sarafat Khan) are both linked to the identical DL number <strong>OD02K20230006858</strong> issued by RTO Bhubaneswar (OD02). Under Indian Motor Vehicles Act, one DL number corresponds to exactly one licensee. The simultaneous association of this DL with two separate PAN holders constitutes a prima facie indicator of <strong>driving licence forgery, identity fraud, or corrupt issuance by RTO official</strong>. Immediate verification with Sarathi portal and RTO OD02 records is required.</div>
+    </div>
+
+    <div class="link-card">
+      <div class="link-header" onclick="toggleLink(this)">
+        <span class="link-severity sev-high">HIGH</span>
+        <span class="link-title">02 &nbsp; Common RTO District — OD02 (Bhubaneswar)</span>
+        <span class="link-chevron">&#9660;</span>
+      </div>
+      <div class="link-body">Both the shared fraudulent DL (<strong>OD02K20230006858</strong>) and Soleman Khan's vehicle (<strong>OD02BX2992</strong>) are registered under RTO Bhubaneswar (OD02). This common administrative anchor suggests that Subject-1 and Subject-2 operate from or through the Bhubaneswar transport circle, potentially with access to an insider or corrupt facilitator within the OD02 RTO office.</div>
+    </div>
+
+    <div class="link-card">
+      <div class="link-header" onclick="toggleLink(this)">
+        <span class="link-severity sev-high">HIGH</span>
+        <span class="link-title">03 &nbsp; Geographic Cluster — Odisha (~50 km Radius)</span>
+        <span class="link-chevron">&#9660;</span>
+      </div>
+      <div class="link-body">All 3 subjects reside within an approximately 50 km corridor in Odisha: <strong>Soleman Khan</strong> (Sundarpada, Bhubaneswar), <strong>Sarafat Khan</strong> (Narsinghpur, Pipili, Puri District), <strong>Sk Rijuwan Alli</strong> (Somanapradhan, Biswalpada, Balipatna, Khordha). This tight geographic proximity enables regular in-person coordination without requiring long-distance travel, and all three fall within the same law-enforcement district footprint.</div>
+    </div>
+
+    <div class="link-card">
+      <div class="link-header" onclick="toggleLink(this)">
+        <span class="link-severity sev-medium">MEDIUM</span>
+        <span class="link-title">04 &nbsp; Generational Pairing — Senior Organizer with Younger Operatives</span>
+        <span class="link-chevron">&#9660;</span>
+      </div>
+      <div class="link-body">Soleman Khan (DOB 23 Apr 2000, age ~26) and Sk Rijuwan Alli (DOB 09 Aug 2000, age ~25) are contemporaries. Sarafat Khan (DOB 06 Jul 1990, age ~35) is a decade older. This generational split is consistent with a pattern where a senior figure (Sarafat) directs or coordinates younger operatives (Soleman, Rijuwan). Sarafat's higher income (Rs 43,530), sole-proprietor GST registration, and 6+ UPI IDs further support his role as the network organizer or financier.</div>
+    </div>
+
+    <div class="link-card">
+      <div class="link-header" onclick="toggleLink(this)">
+        <span class="link-severity sev-medium">MEDIUM</span>
+        <span class="link-title">05 &nbsp; Active Business Entity — MS Enterprises (GST: 21CTNPK0785J1ZG)</span>
+        <span class="link-chevron">&#9660;</span>
+      </div>
+      <div class="link-body">Sarafat Khan registered <strong>MS ENTERPRISES</strong> on 01 March 2026 at Narsinghpur, Pipili — just weeks before this investigation. The business type (Retail + Wholesale) provides a legal shell for cash-based financial flows. First GST returns (GSTR-1 and GSTR-3B) were filed on 16 April 2026 for the March 2026 period. Aadhaar validation completed 05 March 2026. The contact email "incorrectibran@gmail.com" is anomalous — not a personal name-based email — suggesting it was created specifically for this registration. Annual turnover is not yet declared.</div>
+    </div>
+
+    <div class="link-card">
+      <div class="link-header" onclick="toggleLink(this)">
+        <span class="link-severity sev-medium">MEDIUM</span>
+        <span class="link-title">06 &nbsp; Multi-UPI / Multi-Bank Fragmentation Across All 3 Subjects</span>
+        <span class="link-chevron">&#9660;</span>
+      </div>
+      <div class="link-body">Sarafat Khan: 6+ UPI IDs (SBI/YBL and others). Sk Rijuwan Alli: 3 accounts (PNB, Axis Bank, Airtel Payments Bank). Soleman Khan: Bank of India + Airtel UPI. In total, the 3 subjects span <strong>5+ financial institutions</strong> with multiple UPI IDs each. This fragmentation across institutions is consistent with money layering — moving funds through multiple accounts to obscure the trail and avoid single-source transaction monitoring thresholds.</div>
+    </div>
+
+    <div class="link-card">
+      <div class="link-header" onclick="toggleLink(this)">
+        <span class="link-severity sev-low">LOW</span>
+        <span class="link-title">07 &nbsp; Shared Community Network — Extended Person Cluster</span>
+        <span class="link-chevron">&#9660;</span>
+      </div>
+      <div class="link-body">Sarafat Khan's associated persons include <strong>MAMTAZ BEGUM</strong>, <strong>SADATUL BIBI</strong>, and 12 additional names. Sk Rijuwan Alli has 7 associated names including a reference to "RIJUWAN AXIS BANK JATNI BRANCH". The guardian listed in Sarafat Khan's credit bureau record is <strong>C/O MANSUR KHAN</strong>. These overlapping community ties suggest the subjects are embedded in a tight-knit local network that may extend the potential for additional persons of interest beyond these three.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════ TAB: SUBJECT 1 ══════════════════ -->
+<div class="tab-content" id="tab-s1">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#128100;</span> Subject 1 — SOLEMAN KHAN</div>
+
+    <div class="alert critical">
+      <div class="alert-icon">&#9888;</div>
+      <div>
+        <div class="alert-title">DOCUMENT FRAUD — SHARED DL</div>
+        <div class="alert-body">DL OD02K20230006858 is linked to BOTH Soleman Khan AND Sarafat Khan (Subject-2). Verify immediately with RTO OD02.</div>
+      </div>
+    </div>
+
+    <!-- Photo + Signature -->
+    <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;">
+      <div class="sign-box">
+        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">DL Photo — Soleman Khan</div>
+        <div id="s1-big-photo" style="width:120px; height:140px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px; text-align:center; padding:10px;">
+          Photo<br>(add soleman_photo.jpg)
+        </div>
+      </div>
+      <div class="sign-box">
+        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Signature — Soleman Khan</div>
+        <img id="s1-sign-img" src="docs/soleman_sign.png" class="sign-img" onerror="this.style.display='none'; document.getElementById('s1-sign-fallback').style.display='flex';" alt="Signature">
+        <div id="s1-sign-fallback" style="width:260px; height:90px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px;">add soleman_sign.png to docs/</div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px;">
+      <div>
+        <div class="field-group">
+          <div class="field-group-title">Personal Information</div>
+          <div class="field-row"><span class="field-label">Full Name</span><span class="field-value">SOLEMAN KHAN</span></div>
+          <div class="field-row"><span class="field-label">Alias (Breach DB)</span><span class="field-value warning">SALMAN KHAN</span></div>
+          <div class="field-row"><span class="field-label">Gender</span><span class="field-value">Male</span></div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">23 April 2000</span></div>
+          <div class="field-row"><span class="field-label">Age</span><span class="field-value">26 years</span></div>
+          <div class="field-row"><span class="field-label">Father</span><span class="field-value">JAMALU KHAN</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Identity Documents</div>
+          <div class="field-row"><span class="field-label">PAN Number</span><span class="field-value mono accent">IRJPK4750H</span></div>
+          <div class="field-row"><span class="field-label">PAN Allotted</span><span class="field-value">11 July 2019</span></div>
+          <div class="field-row"><span class="field-label">PAN Status</span><span class="field-value">Active and operative</span></div>
+          <div class="field-row"><span class="field-label">PAN Type</span><span class="field-value">Individual</span></div>
+          <div class="field-row"><span class="field-label">Sole Proprietor</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Salaried</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar (masked)</span><span class="field-value mono">20XXXXXXXX07</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Linked</span><span class="field-value">Yes</span></div>
+          <div class="field-row"><span class="field-label">DL Number</span><span class="field-value mono danger">OD02K20230006858 &#9888;</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="field-group">
+          <div class="field-group-title">Mobile & Address</div>
+          <div class="field-row"><span class="field-label">Mobile</span><span class="field-value mono">+91-9348578977</span></div>
+          <div class="field-row"><span class="field-label">Operator</span><span class="field-value">Jio, Prepaid, Odisha</span></div>
+          <div class="field-row"><span class="field-label">Ported</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Reported Date</span><span class="field-value">31 Oct 2022</span></div>
+          <div class="field-row"><span class="field-label">WhatsApp</span><span class="field-value">Active</span></div>
+          <div class="field-row"><span class="field-label">Primary Address</span><span class="field-value">AZAD NAGAR, BACK SIDE OF KAPILA PRASAD HIGH SCHOOL, SUNDARPADA, BHUBANESWAR, KHORDHA — 751002</span></div>
+          <div class="field-row"><span class="field-label">GPS</span><span class="field-value mono">20.237134°N, 85.811414°E</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Banking</div>
+          <div class="field-row"><span class="field-label">Bank</span><span class="field-value">Bank of India</span></div>
+          <div class="field-row"><span class="field-label">IFSC</span><span class="field-value mono">BKID0005559</span></div>
+          <div class="field-row"><span class="field-label">Branch</span><span class="field-value">Kapila Prasad Market Complex, Bhubaneswar</span></div>
+          <div class="field-row"><span class="field-label">UPI VPA</span><span class="field-value mono">9348578977@axl</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Social / Breach</div>
+          <div class="field-row"><span class="field-label">WhatsApp</span><span class="field-value">Active</span></div>
+          <div class="field-row"><span class="field-label">Facebook</span><span class="field-value muted">No data found</span></div>
+          <div class="field-row"><span class="field-label">Corona Breach DB</span><span class="field-value warning">"SALMAN KHAN", Age 21, Sundarpada, Odisha</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TAB: SUBJECT 2 ══════════════════ -->
+<div class="tab-content" id="tab-s2">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#128100;</span> Subject 2 — SARAFAT KHAN</div>
+
+    <div class="alert critical">
+      <div class="alert-icon">&#9888;</div>
+      <div>
+        <div class="alert-title">DOCUMENT FRAUD — SHARED DL + FRESH BUSINESS REGISTRATION</div>
+        <div class="alert-body">DL OD02K20230006858 is shared with Subject-1. Additionally, MS ENTERPRISES GST was registered just 59 days before this investigation date. Annual turnover not yet declared — income flow unknown.</div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-bottom:24px;">
+      <div>
+        <div class="field-group">
+          <div class="field-group-title">Personal Information</div>
+          <div class="field-row"><span class="field-label">Full Name</span><span class="field-value">SARAFAT KHAN</span></div>
+          <div class="field-row"><span class="field-label">Gender</span><span class="field-value">Male</span></div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">06 July 1990</span></div>
+          <div class="field-row"><span class="field-label">Age</span><span class="field-value">35 years</span></div>
+          <div class="field-row"><span class="field-label">Guardian / C/O</span><span class="field-value">MANSUR KHAN (credit bureau)</span></div>
+          <div class="field-row"><span class="field-label">Occupation</span><span class="field-value">SALARIED</span></div>
+          <div class="field-row"><span class="field-label">Annual Income</span><span class="field-value">Rs 43,530 (bureau-reported)</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Identity Documents</div>
+          <div class="field-row"><span class="field-label">PAN Number</span><span class="field-value mono accent">CTNPK0785J</span></div>
+          <div class="field-row"><span class="field-label">PAN Allotted</span><span class="field-value">15 November 2012</span></div>
+          <div class="field-row"><span class="field-label">PAN Status</span><span class="field-value">Active and operative</span></div>
+          <div class="field-row"><span class="field-label">Sole Proprietor</span><span class="field-value warning">YES — MS ENTERPRISES</span></div>
+          <div class="field-row"><span class="field-label">Salaried</span><span class="field-value">YES</span></div>
+          <div class="field-row"><span class="field-label">Director</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar (masked)</span><span class="field-value mono">XXXXXXXX3178</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Linked</span><span class="field-value">Yes</span></div>
+          <div class="field-row"><span class="field-label">Other ID</span><span class="field-value mono">30028128578872</span></div>
+          <div class="field-row"><span class="field-label">DL Number</span><span class="field-value mono danger">OD02K20230006858 &#9888; DUPLICATE</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="field-group">
+          <div class="field-group-title">Mobile & Contact</div>
+          <div class="field-row"><span class="field-label">Mobile</span><span class="field-value mono">+91-7978639986</span></div>
+          <div class="field-row"><span class="field-label">Alt Mobile</span><span class="field-value mono">9776608786 (prev. 2020)</span></div>
+          <div class="field-row"><span class="field-label">Operator</span><span class="field-value">Airtel, Prepaid, Odisha</span></div>
+          <div class="field-row"><span class="field-label">WhatsApp</span><span class="field-value">Active</span></div>
+          <div class="field-row"><span class="field-label">Email</span><span class="field-value">sarafatkhan16@gmail.com</span></div>
+          <div class="field-row"><span class="field-label">Google Gaia ID</span><span class="field-value mono">115932601866432962513</span></div>
+          <div class="field-row"><span class="field-label">Last Google Activity</span><span class="field-value warning">22 April 2026</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Digital Accounts</div>
+          <div class="field-row"><span class="field-label">Wattpad</span><span class="field-value">sarafatkhan (DOB: 11 Feb 1990)</span></div>
+          <div class="field-row"><span class="field-label">RailYatri</span><span class="field-value">Account found</span></div>
+          <div class="field-row"><span class="field-label">IndiaMART</span><span class="field-value">Account found</span></div>
+          <div class="field-row"><span class="field-label">BoAt Lifestyle</span><span class="field-value">Account found</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Banking</div>
+          <div class="field-row"><span class="field-label">Primary Bank</span><span class="field-value">State Bank of India</span></div>
+          <div class="field-row"><span class="field-label">IFSC</span><span class="field-value mono">SBIN0002102</span></div>
+          <div class="field-row"><span class="field-label">Branch</span><span class="field-value">Pipli</span></div>
+          <div class="field-row"><span class="field-label">UPI VPAs</span><span class="field-value mono">khan.sarafat4@ybl + 5 others</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Credit Bureau Addresses -->
+    <div class="bureau-card">
+      <div class="bureau-head">
+        <span class="bureau-name">Credit Bureau — Address History (Sarafat Khan)</span>
+        <span style="font-size:11px; color:var(--muted);">5 entries</span>
+      </div>
+      <div class="bureau-body">
+        <ul class="addr-timeline">
+          <li><div class="addr-dot"></div><div class="addr-info"><div class="addr-text">C/O MANSUR KHAN, INDIA NARASINGHPUR WARD NO-6, PIPILI NAC, PIPILI, NARSINGHPUR WARD NO-6, PURI 752104</div><div class="addr-date">Reported: Jan 2026</div><span class="addr-type">Owns, Primary</span></div></li>
+          <li><div class="addr-dot"></div><div class="addr-info"><div class="addr-text">WARD NO 06, PIPILI NAC, PURI, NARSINGHPUR 2106, ORISSA</div><div class="addr-date">Reported: Jul 2025</div><span class="addr-type">Primary</span></div></li>
+          <li><div class="addr-dot"></div><div class="addr-info"><div class="addr-text">WARD NO 06, NARSINGHPUR, PIPILI NAC, PIPILI 2106, ORISSA</div><div class="addr-date">Reported: Feb 2025</div><span class="addr-type">Primary</span></div></li>
+          <li><div class="addr-dot"></div><div class="addr-info"><div class="addr-text">WARD NO 06, NARSINGHPUR, PIPILI NAC, PIPILI, ORISSA</div><div class="addr-date">Reported: Apr 2024</div><span class="addr-type">Primary</span></div></li>
+          <li><div class="addr-dot"></div><div class="addr-info"><div class="addr-text">WARD NO-06, NARASINGHPUR, PURI 752104</div><div class="addr-date">Reported: Feb 2024</div><span class="addr-type">Owns</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top:16px;">
+      <div class="field-group-title">Associated Persons</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;">
+        <span style="background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px;">MAMTAZ BEGUM</span>
+        <span style="background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px;">SADATUL BIBI</span>
+        <span style="background:var(--surface3); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px; color:var(--muted);">+12 additional names in network</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TAB: SUBJECT 3 ══════════════════ -->
+<div class="tab-content" id="tab-s3">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#128100;</span> Subject 3 — SK RIJUWAN ALLI</div>
+
+    <div class="alert warning">
+      <div class="alert-icon">&#9888;</div>
+      <div>
+        <div class="alert-title">HIGHEST DIGITAL EXPOSURE — 74%</div>
+        <div class="alert-body">Sk Rijuwan Alli has the most recoverable digital footprint of the three subjects. Two email accounts, Facebook profile (ID: 100026731551140), three banking relationships, and full Aadhaar details available.</div>
+      </div>
+    </div>
+
+    <!-- Aadhaar photo placeholder -->
+    <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;">
+      <div class="sign-box">
+        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Aadhaar Card Photo — Sk Rijuwan Alli</div>
+        <img id="s3-aadhaar-img" src="docs/rijuwan_aadhaar.jpg" style="max-width:340px; border-radius:8px; border:2px solid var(--border);" onerror="this.style.display='none'; document.getElementById('s3-aadh-fallback').style.display='flex';" alt="Aadhaar Card">
+        <div id="s3-aadh-fallback" style="width:340px; height:210px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px;">add rijuwan_aadhaar.jpg to docs/</div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px;">
+      <div>
+        <div class="field-group">
+          <div class="field-group-title">Personal Information</div>
+          <div class="field-row"><span class="field-label">Full Name</span><span class="field-value">SK RIJUWAN ALLI</span></div>
+          <div class="field-row"><span class="field-label">Gender</span><span class="field-value">Male</span></div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">09 August 2000</span></div>
+          <div class="field-row"><span class="field-label">Age</span><span class="field-value">25 years</span></div>
+          <div class="field-row"><span class="field-label">Father</span><span class="field-value">SK JABAR</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Identity Documents</div>
+          <div class="field-row"><span class="field-label">PAN Number</span><span class="field-value mono accent">ERLPA9379A</span></div>
+          <div class="field-row"><span class="field-label">PAN Type</span><span class="field-value">Individual</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar</span><span class="field-value mono">2286 3126 1600</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar VID</span><span class="field-value mono">9100 9665 5409 2299</span></div>
+          <div class="field-row"><span class="field-label">Enrolment ID</span><span class="field-value mono">2189/76088/89419</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Issued</span><span class="field-value">06 March 2013</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Linked</span><span class="field-value">Yes (mobile: 9090035592)</span></div>
+          <div class="field-row"><span class="field-label">Other ID</span><span class="field-value mono">50041983462512</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Address (from PAN/Aadhaar)</div>
+          <div class="field-row"><span class="field-label">Address</span><span class="field-value">SOMANAPRADHAN, Biswalpada B.O, BISWALPADA, 752114, Somana Padhan, Odisha, India</span></div>
+          <div class="field-row"><span class="field-label">Landmark</span><span class="field-value">Near Somanapradhan UP School</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="field-group">
+          <div class="field-group-title">Mobile & Contact</div>
+          <div class="field-row"><span class="field-label">Mobile</span><span class="field-value mono">+91-9090035592</span></div>
+          <div class="field-row"><span class="field-label">Operator</span><span class="field-value">Airtel, Prepaid, Odisha</span></div>
+          <div class="field-row"><span class="field-label">Ported</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Email 1</span><span class="field-value">skrijuwan64@gmail.com</span></div>
+          <div class="field-row"><span class="field-label">Email 2</span><span class="field-value">rijwanali34948@gmail.com</span></div>
+          <div class="field-row"><span class="field-label">Google Gaia ID</span><span class="field-value mono">113789573325322595446</span></div>
+          <div class="field-row"><span class="field-label">Last Google Activity</span><span class="field-value">18 March 2024</span></div>
+          <div class="field-row"><span class="field-label">Facebook ID</span><span class="field-value mono">100026731551140</span></div>
+          <div class="field-row"><span class="field-label">FB Description</span><span class="field-value">Young male, white kurta, sunglasses</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Banking</div>
+          <div class="field-row"><span class="field-label">Primary Bank</span><span class="field-value">Punjab National Bank</span></div>
+          <div class="field-row"><span class="field-label">IFSC</span><span class="field-value mono">PUNB0796800</span></div>
+          <div class="field-row"><span class="field-label">Branch</span><span class="field-value">Haripur, Puri</span></div>
+          <div class="field-row"><span class="field-label">UPI (PNB)</span><span class="field-value mono">skrijuwan64@ibl</span></div>
+          <div class="field-row"><span class="field-label">UPI (Axis)</span><span class="field-value mono">Axis Bank VPA</span></div>
+          <div class="field-row"><span class="field-label">UPI (Airtel)</span><span class="field-value mono">Airtel Payments Bank</span></div>
+        </div>
+        <div class="field-group">
+          <div class="field-group-title">Address History (Bureau)</div>
+          <div style="font-size:12px; color:var(--muted); line-height:1.8;">
+            S/O SK JABAR, SOMANAPRADHAN, BISWALPADA, BALIPATNA, ORISSA 752114 (Nov 2025)<br>
+            S/O SK JABAR, AT SOMANAPRADHAN, NEAR SOMANAPRADHAN UP SCHOOL, ORISSA 752114 (Oct 2025)<br>
+            S/O SK JABAR, SOMANAPRADHAN, BISWALPADA, KHORDA, BALIPATANA (Jun 2025)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top:16px;">
+      <div class="field-group-title">Associated Names</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;">
+        <span style="background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px;">RIJUWAN AXIS BANK JATNI BRANCH</span>
+        <span style="background:var(--surface3); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:12px; color:var(--muted);">+6 additional associated names</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TAB: VEHICLES ══════════════════ -->
+<div class="tab-content" id="tab-vehicles">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#128663;</span> Vehicle Registration Certificates</div>
+    <div class="rc-grid">
+      <!-- OD02BX2992 -->
+      <div class="rc-card">
+        <div class="rc-card-head">
+          <div class="rc-reg-num">OD02BX2992</div>
+          <div class="rc-type">M-Cycle/Scooter &nbsp;|&nbsp; Government of Odisha</div>
+        </div>
+        <div class="rc-body">
+          <div class="rc-field"><span class="rc-label">Owner Name</span><span class="rc-value">SOLEMAN KHAN</span></div>
+          <div class="rc-field"><span class="rc-label">Father of Owner</span><span class="rc-value">JAMALU KHAN</span></div>
+          <div class="rc-field"><span class="rc-label">Date of Registration</span><span class="rc-value">2022-03-14</span></div>
+          <div class="rc-field"><span class="rc-label">Registration Valid Till</span><span class="rc-value">2037-03-13</span></div>
+          <div class="rc-field"><span class="rc-label">Maker</span><span class="rc-value">HERO MOTOCORP LTD</span></div>
+          <div class="rc-field"><span class="rc-label">Model</span><span class="rc-value">HF DELUXE (SELF-DRUM-CAST)</span></div>
+          <div class="rc-field"><span class="rc-label">Color</span><span class="rc-value">GREY BLACK</span></div>
+          <div class="rc-field"><span class="rc-label">Body Type</span><span class="rc-value">SOLO WITH PILLION</span></div>
+          <div class="rc-field"><span class="rc-label">Seating Capacity</span><span class="rc-value">2</span></div>
+          <div class="rc-field"><span class="rc-label">Unladen Weight</span><span class="rc-value">112 Kg</span></div>
+          <div class="rc-field"><span class="rc-label">Cubic Capacity</span><span class="rc-value">97.2 cc</span></div>
+          <div class="rc-field"><span class="rc-label">Chassis Number</span><span class="rc-value">MBLHAW148MHM00822</span></div>
+          <div class="rc-field"><span class="rc-label">Engine Number</span><span class="rc-value">HA11ESMHM75704</span></div>
+          <div class="rc-field"><span class="rc-label">Emission Norms</span><span class="rc-value">NA</span></div>
+          <div class="rc-field"><span class="rc-label">Financier</span><span class="rc-value">NA (No loan)</span></div>
+          <div class="rc-field"><span class="rc-label">Address</span><span class="rc-value">AZAD NAGAR, BACK SIDE OF KAPILA PRASAD HIGH SCHOOL, SUNDARPADA, BHUBANESWAR, KHORDHA, ODISHA, PIN: 72</span></div>
+        </div>
+        <div class="rc-foot">
+          <span class="validity-tag valid-ok">Valid till 2037</span>
+          <span class="fuel-petrol">PETROL</span>
+        </div>
+      </div>
+      <!-- OD13W6626 -->
+      <div class="rc-card">
+        <div class="rc-card-head">
+          <div class="rc-reg-num">OD13W6626</div>
+          <div class="rc-type">M-Cycle/Scooter (EV) &nbsp;|&nbsp; Government of Odisha</div>
+        </div>
+        <div class="rc-body">
+          <div class="rc-field"><span class="rc-label">Owner Name</span><span class="rc-value">SK RIJUWAN ALLI</span></div>
+          <div class="rc-field"><span class="rc-label">Father of Owner</span><span class="rc-value">SK JABAR</span></div>
+          <div class="rc-field"><span class="rc-label">Date of Registration</span><span class="rc-value">2024-12-12</span></div>
+          <div class="rc-field"><span class="rc-label">Registration Valid Till</span><span class="rc-value">2039-12-11</span></div>
+          <div class="rc-field"><span class="rc-label">Maker</span><span class="rc-value">BAJAJ AUTO LTD</span></div>
+          <div class="rc-field"><span class="rc-label">Model</span><span class="rc-value">CHETAK BLUE 29 03</span></div>
+          <div class="rc-field"><span class="rc-label">Color</span><span class="rc-value">EBONY BLACK MET</span></div>
+          <div class="rc-field"><span class="rc-label">Body Type</span><span class="rc-value">SOLO WITH PILLION</span></div>
+          <div class="rc-field"><span class="rc-label">Seating Capacity</span><span class="rc-value">2</span></div>
+          <div class="rc-field"><span class="rc-label">Unladen Weight</span><span class="rc-value">125 Kg</span></div>
+          <div class="rc-field"><span class="rc-label">Cubic Capacity</span><span class="rc-value">0 (Electric)</span></div>
+          <div class="rc-field"><span class="rc-label">Chassis Number</span><span class="rc-value">MD2C59204RAH32491</span></div>
+          <div class="rc-field"><span class="rc-label">Engine / Motor No</span><span class="rc-value">E20ARG21706</span></div>
+          <div class="rc-field"><span class="rc-label">Financier</span><span class="rc-value">NA (No loan)</span></div>
+          <div class="rc-field"><span class="rc-label">Address</span><span class="rc-value">SOMANAPRADHAN, BISWALPADA, BALIPATNA, KHORDHA, ODISHA, PIN: 74</span></div>
+        </div>
+        <div class="rc-foot">
+          <span class="validity-tag valid-ok">Valid till 2039</span>
+          <span class="fuel-ev">PURE EV</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TAB: CHALLANS ══════════════════ -->
+<div class="tab-content" id="tab-challans">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#9937;</span> Traffic Challans — OD02BX2992 (Soleman Khan) <span class="section-badge badge-critical">3 Pending</span></div>
+    <div class="alert critical" style="margin-bottom:16px;">
+      <div class="alert-icon">&#9888;</div>
+      <div><div class="alert-title">3 PENDING CHALLANS — TOTAL Rs 2,500</div><div class="alert-body">All three challans on vehicle OD02BX2992 remain unpaid. State: Odisha (OR). These may be used as a leverage point for physical contact or official action against Soleman Khan.</div></div>
+    </div>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden;">
+      <table class="challan-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Challan Reference</th>
+            <th>Section / Offence</th>
+            <th>State</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--muted);">1</td>
+            <td><span class="challan-ref">OR98221220802124437</span></td>
+            <td>Sec 177 — General Offence</td>
+            <td style="color:var(--muted);">OR</td>
+            <td style="font-weight:700;">Rs 500</td>
+            <td><span class="pending-tag">PENDING</span></td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);">2</td>
+            <td><span class="challan-ref">OR98220220603185210</span></td>
+            <td>Sec 194(D) — Driving without Helmet (x2)</td>
+            <td style="color:var(--muted);">OR</td>
+            <td style="font-weight:700;">Rs 1,000</td>
+            <td><span class="pending-tag">PENDING</span></td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);">3</td>
+            <td><span class="challan-ref">OR98223220510104023</span></td>
+            <td>Sec 194(D) — Driving without Helmet (x2)</td>
+            <td style="color:var(--muted);">OR</td>
+            <td style="font-weight:700;">Rs 1,000</td>
+            <td><span class="pending-tag">PENDING</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="challan-total">TOTAL PENDING: Rs 2,500</div>
+    </div>
+    <div style="margin-top:20px;">
+      <div class="section-title" style="font-size:14px; margin-bottom:12px;">Challan Documents</div>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <div class="doc-card-head"><span class="doc-name">OR98221220802124437.pdf</span><a class="doc-download" href="docs/OR98221220802124437.pdf" download>Download</a></div>
+          <iframe class="pdf-frame" src="docs/OR98221220802124437.pdf"></iframe>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-head"><span class="doc-name">OR98220220603185210.pdf</span><a class="doc-download" href="docs/OR98220220603185210.pdf" download>Download</a></div>
+          <iframe class="pdf-frame" src="docs/OR98220220603185210.pdf"></iframe>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-head"><span class="doc-name">OR98223220510104023.pdf</span><a class="doc-download" href="docs/OR98223220510104023.pdf" download>Download</a></div>
+          <iframe class="pdf-frame" src="docs/OR98223220510104023.pdf"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TAB: GST ══════════════════ -->
+<div class="tab-content" id="tab-gst">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#128203;</span> GST Registration — MS Enterprises</div>
+
+    <div class="gst-card">
+      <div class="gst-head">
+        <div class="gst-num">21CTNPK0785J1ZG</div>
+        <div class="gst-biz">MS ENTERPRISES</div>
+        <div class="gst-legal">Legal Name: SARAFAT KHAN &nbsp;|&nbsp; State: Odisha (21)</div>
+      </div>
+      <div class="gst-body">
+        <div class="gst-col">
+          <div class="field-group-title" style="margin-bottom:10px;">Registration Details</div>
+          <div class="field-row"><span class="field-label">GSTIN</span><span class="field-value mono">21CTNPK0785J1ZG</span></div>
+          <div class="field-row"><span class="field-label">PAN Linked</span><span class="field-value mono">CTNPK0785J</span></div>
+          <div class="field-row"><span class="field-label">Registration Date</span><span class="field-value warning">01 March 2026 (recent)</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Validated</span><span class="field-value">Yes — 05 March 2026</span></div>
+          <div class="field-row"><span class="field-label">GSTIN Status</span><span class="field-value" style="color:var(--success);">Active</span></div>
+          <div class="field-row"><span class="field-label">Taxpayer Type</span><span class="field-value">Active — Regular</span></div>
+          <div class="field-row"><span class="field-label">Nature of Business</span><span class="field-value">Retail Business, Wholesale Business</span></div>
+          <div class="field-row"><span class="field-label">Field Visit Done</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Annual Turnover</span><span class="field-value warning">Not declared yet</span></div>
+          <div class="field-row" style="margin-top:12px;"><span class="field-label">Contact Phone</span><span class="field-value mono">7978639986</span></div>
+          <div class="field-row"><span class="field-label">Contact Email</span><span class="field-value danger">incorrectibran@gmail.com (anomalous)</span></div>
+        </div>
+        <div class="gst-col">
+          <div class="field-group-title" style="margin-bottom:10px;">Address</div>
+          <div style="font-size:13px; color:var(--text); line-height:1.7; margin-bottom:16px;">
+            PLOT NO-177, KHATA NO-138,<br>
+            MOUJA-NARSINGHPUR, Pipili Main Road,<br>
+            NEAR INDIAN OIL PETROL PUMP,<br>
+            NARSINGHPUR, Pipili, Puri, Odisha — 752104
+          </div>
+          <div class="field-group-title" style="margin-bottom:10px;">Jurisdiction</div>
+          <div class="field-row"><span class="field-label">State</span><span class="field-value">Odisha</span></div>
+          <div class="field-row"><span class="field-label">Range</span><span class="field-value">Puri</span></div>
+          <div class="field-row"><span class="field-label">Circle</span><span class="field-value">Puri Circle</span></div>
+          <div class="field-row"><span class="field-label">CBIC Zone</span><span class="field-value">BHUBANESWAR</span></div>
+          <div class="field-row"><span class="field-label">Commissionerate</span><span class="field-value">BHUBANESWAR</span></div>
+          <div class="field-row"><span class="field-label">Division</span><span class="field-value">BHUBANESWAR II DIVISION</span></div>
+          <div class="field-row"><span class="field-label">Range (CBIC)</span><span class="field-value">PURI II RANGE</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div class="section-title" style="font-size:14px; margin-bottom:12px;">GST Return Filing History</div>
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden;">
+        <table class="gst-filing-table">
+          <thead>
+            <tr>
+              <th>Return Type</th>
+              <th>Return Period</th>
+              <th>Fiscal Year</th>
+              <th>ARN</th>
+              <th>Date Filed</th>
+              <th>Mode</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;">GSTR-1</td>
+              <td>03/2026 (March 2026)</td>
+              <td>2025-26</td>
+              <td style="font-family:monospace; font-size:11px;">AA2103262466494</td>
+              <td>16 April 2026</td>
+              <td>ONLINE</td>
+              <td><span class="filed-tag">FILED</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;">GSTR-3B</td>
+              <td>03/2026 (March 2026)</td>
+              <td>2025-26</td>
+              <td style="font-family:monospace; font-size:11px;">AA210326247435G</td>
+              <td>16 April 2026</td>
+              <td>ONLINE</td>
+              <td><span class="filed-tag">FILED</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="padding:10px 12px; background:var(--surface2); font-size:11px; color:var(--muted);">
+          Note: Only 1 month of filings on record. Business registered 01 Mar 2026. First returns filed 16 Apr 2026 for March period. No FY 2024-25 returns. Annual turnover not yet disclosed.
+        </div>
+      </div>
+    </div>
+
+    <div class="alert warning" style="margin-top:16px;">
+      <div class="alert-icon">&#9888;</div>
+      <div>
+        <div class="alert-title">INVESTIGATOR NOTE</div>
+        <div class="alert-body">MS Enterprises was registered 59 days before this investigation. The business was created as "Retail + Wholesale" at a location near an Indian Oil petrol pump in Narsinghpur, Pipili. No field visit has been conducted by GST authorities. Aadhaar validation was completed within 4 days of registration (05 Mar 2026), suggesting active setup. The contact email "incorrectibran@gmail.com" does not correspond to Sarafat's known email (sarafatkhan16@gmail.com) — it was likely created as a burner specifically for the GST filing.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TAB: PAN ══════════════════ -->
+<div class="tab-content" id="tab-pan">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#128196;</span> PAN & Credit Bureau Records</div>
+
+    <div class="pan-grid">
+      <!-- PAN 1 -->
+      <div class="pan-card">
+        <div class="pan-head">
+          <span class="pan-num">IRJPK4750H</span>
+          <span class="pan-status">Active</span>
+        </div>
+        <div class="pan-body">
+          <div class="field-row"><span class="field-label">Full Name</span><span class="field-value">SOLEMAN KHAN</span></div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">23/04/2000</span></div>
+          <div class="field-row"><span class="field-label">Gender</span><span class="field-value">Male</span></div>
+          <div class="field-row"><span class="field-label">PAN Type</span><span class="field-value">Individual</span></div>
+          <div class="field-row"><span class="field-label">Allotment Date</span><span class="field-value">11 July 2019</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Linked</span><span class="field-value">Yes (20XXXXXXXX07)</span></div>
+          <div class="field-row"><span class="field-label">Sole Proprietor</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Director</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Salaried</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Total Income</span><span class="field-value muted">Not declared</span></div>
+          <div class="field-row"><span class="field-label">Address</span><span class="field-value">India (not detailed)</span></div>
+        </div>
+      </div>
+
+      <!-- PAN 2 -->
+      <div class="pan-card">
+        <div class="pan-head">
+          <span class="pan-num">CTNPK0785J</span>
+          <span class="pan-status">Active</span>
+        </div>
+        <div class="pan-body">
+          <div class="field-row"><span class="field-label">Full Name</span><span class="field-value">SARAFAT KHAN</span></div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">06/07/1990</span></div>
+          <div class="field-row"><span class="field-label">Gender</span><span class="field-value">Male</span></div>
+          <div class="field-row"><span class="field-label">PAN Type</span><span class="field-value">Individual</span></div>
+          <div class="field-row"><span class="field-label">Allotment Date</span><span class="field-value">15 November 2012</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Linked</span><span class="field-value">Yes (XXXXXXXX3178)</span></div>
+          <div class="field-row"><span class="field-label">Sole Proprietor</span><span class="field-value warning">YES — MS ENTERPRISES</span></div>
+          <div class="field-row"><span class="field-label">Director</span><span class="field-value">No</span></div>
+          <div class="field-row"><span class="field-label">Salaried</span><span class="field-value">YES</span></div>
+          <div class="field-row"><span class="field-label">Reported Income</span><span class="field-value">Rs 43,530 (bureau)</span></div>
+          <div class="field-row"><span class="field-label">GST GSTIN</span><span class="field-value mono">21CTNPK0785J1ZG</span></div>
+        </div>
+      </div>
+
+      <!-- PAN 3 -->
+      <div class="pan-card">
+        <div class="pan-head">
+          <span class="pan-num">ERLPA9379A</span>
+          <span class="pan-status">Active</span>
+        </div>
+        <div class="pan-body">
+          <div class="field-row"><span class="field-label">Full Name</span><span class="field-value">SK RIJUWAN ALLI</span></div>
+          <div class="field-row"><span class="field-label">DOB</span><span class="field-value">09/08/2000</span></div>
+          <div class="field-row"><span class="field-label">First Name</span><span class="field-value">SK</span></div>
+          <div class="field-row"><span class="field-label">Middle Name</span><span class="field-value">RIJUWAN</span></div>
+          <div class="field-row"><span class="field-label">Last Name</span><span class="field-value">ALLI</span></div>
+          <div class="field-row"><span class="field-label">Father's Name</span><span class="field-value">JABAR SK</span></div>
+          <div class="field-row"><span class="field-label">Aadhaar Linked</span><span class="field-value">Yes (XXXXXXXX1600)</span></div>
+          <div class="field-row"><span class="field-label">Linked Mobile</span><span class="field-value mono">9090035592</span></div>
+          <div class="field-row"><span class="field-label">Linked Email</span><span class="field-value">skrijuwan64@gmail.com</span></div>
+          <div class="field-row"><span class="field-label">Address</span><span class="field-value">SOMANAPRADHAN, Biswalpada B.O, BISWALPADA, 752114, Odisha</span></div>
+          <div class="field-row"><span class="field-label">Other ID</span><span class="field-value mono">50041983462512</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Credit Bureau - Sarafat phones -->
+    <div class="bureau-card" style="margin-top:24px;">
+      <div class="bureau-head">
+        <span class="bureau-name">Credit Bureau — Phone History (Sarafat Khan — 7978639986)</span>
+      </div>
+      <div class="bureau-body">
+        <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
+          <thead><tr style="background:var(--surface2);"><th style="padding:8px 12px; text-align:left; color:var(--muted);">Number</th><th style="padding:8px 12px; text-align:left; color:var(--muted);">Type</th><th style="padding:8px 12px; text-align:left; color:var(--muted);">Reported Date</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:8px 12px; font-family:monospace;">7978639986</td><td style="padding:8px 12px;">Home</td><td style="padding:8px 12px; color:var(--muted);">2025-06-30</td></tr>
+            <tr><td style="padding:8px 12px; font-family:monospace;">917978639986</td><td style="padding:8px 12px;">Home (with country code)</td><td style="padding:8px 12px; color:var(--muted);">2023-09-30</td></tr>
+            <tr><td style="padding:8px 12px; font-family:monospace;">7978639986</td><td style="padding:8px 12px;">Mobile</td><td style="padding:8px 12px; color:var(--muted);">2026-03-31</td></tr>
+            <tr><td style="padding:8px 12px; font-family:monospace; color:var(--warning);">9776608786</td><td style="padding:8px 12px; color:var(--warning);">Mobile (previous)</td><td style="padding:8px 12px; color:var(--muted);">2020-09-30</td></tr>
+          </tbody>
+        </table>
+        <div style="padding:8px 12px; background:var(--surface2); font-size:11px; color:var(--warning);">Note: 9776608786 was previously associated with Sarafat Khan (2020). This number should be checked for current ownership.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TAB: DOCUMENTS ══════════════════ -->
+<div class="tab-content" id="tab-docs">
+  <div class="section">
+    <div class="section-title"><span class="sect-icon">&#128196;</span> Original Documents</div>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-card-head"><span class="doc-name">RC — OD02BX2992 (Soleman Khan)</span><a class="doc-download" href="docs/RC_OD02BX2992.pdf" download>Download</a></div>
+        <iframe class="pdf-frame" src="docs/RC_OD02BX2992.pdf"></iframe>
+      </div>
+      <div class="doc-card">
+        <div class="doc-card-head"><span class="doc-name">RC — OD13W6626 (Sk Rijuwan Alli)</span><a class="doc-download" href="docs/RC_OD13W6626.pdf" download>Download</a></div>
+        <iframe class="pdf-frame" src="docs/RC_OD13W6626.pdf"></iframe>
+      </div>
+      <div class="doc-card">
+        <div class="doc-card-head"><span class="doc-name">Challan — OR98221220802124437</span><a class="doc-download" href="docs/OR98221220802124437.pdf" download>Download</a></div>
+        <iframe class="pdf-frame" src="docs/OR98221220802124437.pdf"></iframe>
+      </div>
+      <div class="doc-card">
+        <div class="doc-card-head"><span class="doc-name">Challan — OR98220220603185210</span><a class="doc-download" href="docs/OR98220220603185210.pdf" download>Download</a></div>
+        <iframe class="pdf-frame" src="docs/OR98220220603185210.pdf"></iframe>
+      </div>
+      <div class="doc-card">
+        <div class="doc-card-head"><span class="doc-name">Challan — OR98223220510104023</span><a class="doc-download" href="docs/OR98223220510104023.pdf" download>Download</a></div>
+        <iframe class="pdf-frame" src="docs/OR98223220510104023.pdf"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="site-footer">
+  <div class="footer-case">Case Reference: CHK-2026-OD-0042 &nbsp;|&nbsp; Generated: 29 April 2026</div>
+  <div class="footer-text">
+    RESTRICTED — FOR AUTHORISED LAW ENFORCEMENT USE ONLY<br>
+    This intelligence report is generated by Chakra OSINT Platform. All data aggregated from open-source intelligence methods and law-enforcement accessible databases.<br>
+    Findings are intelligence, not evidence. Must be independently corroborated through legally admissible methods before use in any prosecutorial proceeding.<br>
+    Unauthorised disclosure, copying, or distribution is prohibited.
+  </div>
+</div>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleLink(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+  if (card.classList.contains('open')) {
+    card.querySelector('.link-body').style.display = 'block';
+  } else {
+    card.querySelector('.link-body').style.display = 'none';
+  }
+}
+
+// Open all link bodies that are .open by default
+document.querySelectorAll('.link-card.open .link-body').forEach(b => b.style.display = 'block');
+</script>
+</body>
+</html>
