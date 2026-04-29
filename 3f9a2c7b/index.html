@@ -428,8 +428,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
     <div class="subject-card s2">
       <div class="subject-header">
         <div class="subject-photo-wrap">
-          <!-- Try Google profile photo from Gaia ID -->
-          <img src="https://lh3.googleusercontent.com/a/ACg8ocJ_sarafat_115932601866432962513" style="width:80px;height:80px;border-radius:8px;object-fit:cover;border:2px solid var(--danger);" onerror="this.src='https://www.googleapis.com/plus/v1/people/115932601866432962513/photos'; this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex';};" alt="Sarafat Khan">
+          <img src="docs/sarafat_photo.png" style="width:80px;height:80px;border-radius:8px;object-fit:cover;border:2px solid var(--danger);" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" alt="Sarafat Khan">
           <div class="subject-photo-placeholder" style="display:none;">&#128100;</div>
           <div class="badge-number">2</div>
         </div>
@@ -732,11 +731,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', syste
     <!-- Photo block -->
     <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px; align-items:flex-start;">
       <div class="sign-box">
-        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Google Profile Photo — Sarafat Khan</div>
-        <img id="s2-gaia-img" src="https://lh3.googleusercontent.com/a/ACg8ocJ115932601866432962513=s400" style="max-width:220px; border-radius:8px; border:2px solid var(--danger);" onerror="this.src='https://lh3.googleusercontent.com/a/115932601866432962513=s400'; this.onerror=function(){this.style.display='none'; document.getElementById('s2-photo-fallback').style.display='flex';};" alt="Sarafat Khan Google">
+        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Subject Photo — Sarafat Khan</div>
+        <img id="s2-gaia-img" src="docs/sarafat_photo.png" style="max-width:280px; border-radius:8px; border:2px solid var(--danger);" onerror="this.style.display='none'; document.getElementById('s2-photo-fallback').style.display='flex';" alt="Sarafat Khan">
         <div id="s2-photo-fallback" style="width:220px; height:220px; background:var(--surface3); border:2px dashed var(--border); border-radius:8px; display:none; align-items:center; justify-content:center; flex-direction:column; gap:6px; color:var(--muted); font-size:11px; text-align:center;">
           <span style="font-size:36px;">&#128100;</span>
-          <span>No photo retrieved<br>Gaia ID: 115932601866432962513</span>
+          <span>Photo not available</span>
         </div>
         <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
           <a href="https://www.google.com/maps/contrib/115932601866432962513" target="_blank" style="background:#1f6feb; color:#fff; padding:4px 10px; border-radius:4px; font-size:11px; text-decoration:none;">Maps Profile</a>
